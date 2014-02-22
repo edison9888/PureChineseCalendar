@@ -171,6 +171,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="firstButton" destination="dDH-dV-5HX" id="lEx-2U-gJ7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIR-vc-Hyi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
