@@ -30,6 +30,30 @@
     lunarMonthLabel.text = [NSString stringWithFormat:@"%@月  %@",
                             info[@"lunarMonth"], info[@"lunarDay"]];
     solarDayLabel.text = [NSString stringWithFormat:@"%@ - %@ - %@   星期%@", info[@"sYear"], info[@"sMonth"], info[@"sDay"], info[@"week"]];
+    
+    UIInterpolatingMotionEffect *verticalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc]
+     initWithKeyPath:@"center.y"
+     type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(-20);
+    verticalMotionEffect.maximumRelativeValue = @(20);
+    
+    // Set horizontal effect
+    UIInterpolatingMotionEffect *horizontalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc]
+     initWithKeyPath:@"center.x"
+     type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(-20);
+    horizontalMotionEffect.maximumRelativeValue = @(20);
+    
+    // Create group to combine both
+    UIMotionEffectGroup *group = [UIMotionEffectGroup new];
+    group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+    
+    // Add both effects to your view
+    [lunarYearLabel addMotionEffect:group];
+    [lunarMonthLabel addMotionEffect:group];
+    [solarDayLabel addMotionEffect:group];
 }
 
 - (void)didReceiveMemoryWarning
