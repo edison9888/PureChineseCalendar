@@ -7,6 +7,7 @@
 //
 
 #import "WYCurrentMonthController.h"
+#import "WYCalendarCalculater.h"
 
 @interface WYCurrentMonthController ()
 {
@@ -29,8 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
     
+    // 下面是试验悬浮效果
     UIInterpolatingMotionEffect *verticalMotionEffect =
     [[UIInterpolatingMotionEffect alloc]
      initWithKeyPath:@"center.y"
@@ -52,6 +54,11 @@
     
     // Add both effects to your view
     [firstButton addMotionEffect:group];
+    
+    
+    [[WYCalendarCalculater shareInstance] daysOfLunarMonth:4
+                                              forLunarYear:2012
+                                               isLeapMonth:YES];
 }
 
 - (void)didReceiveMemoryWarning

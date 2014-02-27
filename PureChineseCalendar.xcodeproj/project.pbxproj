@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E0E5E5818B8218F003B20BE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0E5E5718B8218F003B20BE /* CoreMotion.framework */; };
+		1E3BAA8918BCDEEE00C697D6 /* WYCurrentMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BAA8818BCDEEE00C697D6 /* WYCurrentMonthView.m */; };
 		D30CEEC5189B4D720088CCE4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30CEEC4189B4D720088CCE4 /* Foundation.framework */; };
 		D30CEEC7189B4D720088CCE4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30CEEC6189B4D720088CCE4 /* CoreGraphics.framework */; };
 		D30CEEC9189B4D720088CCE4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30CEEC8189B4D720088CCE4 /* UIKit.framework */; };
@@ -53,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		1E0E5E5718B8218F003B20BE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		1E3BAA8718BCDEEE00C697D6 /* WYCurrentMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYCurrentMonthView.h; path = Class/WYCurrentMonthView.h; sourceTree = "<group>"; };
+		1E3BAA8818BCDEEE00C697D6 /* WYCurrentMonthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYCurrentMonthView.m; path = Class/WYCurrentMonthView.m; sourceTree = "<group>"; };
 		D30CEEC1189B4D720088CCE4 /* PureChineseCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PureChineseCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30CEEC4189B4D720088CCE4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D30CEEC6189B4D720088CCE4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -285,6 +288,8 @@
 			children = (
 				D37B963418B0AA3400623499 /* WYCurrentMonthController.h */,
 				D37B963518B0AA3400623499 /* WYCurrentMonthController.m */,
+				1E3BAA8718BCDEEE00C697D6 /* WYCurrentMonthView.h */,
+				1E3BAA8818BCDEEE00C697D6 /* WYCurrentMonthView.m */,
 			);
 			name = "Current Month Controller";
 			sourceTree = "<group>";
@@ -449,6 +454,7 @@
 				D30CEF18189D18A00088CCE4 /* WYLockView.m in Sources */,
 				D3B3B3DB18A2681700C30BD3 /* WYBodyViewController.m in Sources */,
 				D37B963618B0AA3400623499 /* WYCurrentMonthController.m in Sources */,
+				1E3BAA8918BCDEEE00C697D6 /* WYCurrentMonthView.m in Sources */,
 				D34178D3189F21AC00E64EBB /* WYCalendarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
