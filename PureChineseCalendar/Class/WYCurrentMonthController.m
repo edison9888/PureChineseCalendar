@@ -8,6 +8,7 @@
 
 #import "WYCurrentMonthController.h"
 #import "WYParallaxMotion.h"
+#import "WYCalendarCalculater.h"
 
 @interface WYCurrentMonthController ()
 {
@@ -32,6 +33,11 @@
     [super viewDidLoad];
     
     [WYParallaxMotion addParallaxMotionForView:firstButton];
+
+    
+    [[WYCalendarCalculater shareInstance] daysOfLunarMonth:4
+                                              forLunarYear:2012
+                                               isLeapMonth:YES];
 }
 
 - (void)didReceiveMemoryWarning

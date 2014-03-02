@@ -143,7 +143,7 @@
                         <viewControllerLayoutGuide type="top" id="EHB-4g-Ihl"/>
                         <viewControllerLayoutGuide type="bottom" id="X9S-DB-IrR"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ePK-lT-FGc">
+                    <view key="view" contentMode="scaleToFill" id="ePK-lT-FGc" customClass="WYCurrentMonthView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>

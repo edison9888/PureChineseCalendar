@@ -366,6 +366,18 @@
 
       return addFstv(sYear, sMonth, sDay, weekDay, lunarYear, lunarMonth, lunarDay, isLeap);
     }
+  
+  // 这个是某年的这个月下有多少天
+  // 参数是公历某
+      this.daysOfMonth = function(lYear, lMonth, isLeapMonth){
+		  var days;
+	      if (isLeapMonth){
+	      	days = leapDays(lYear);
+	      }else{
+	      	days = monthDays(lYear, lMonth);
+	      }
+		  return days;
+      }
 
   }
   function addFstv(sYear, sMonth, sDay, weekDay, lunarYear, lunarMonth, lunarDay, isLeap) {

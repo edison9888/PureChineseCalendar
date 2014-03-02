@@ -30,9 +30,9 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     WYBodyViewController *bodyController = [storyboard instantiateViewControllerWithIdentifier:@"WYBodyViewController"];
     WYCurrentMonthController *monthController = [storyboard instantiateViewControllerWithIdentifier:@"WYCurrentMonthController"];
-    bodyController.view.left = 0;
+    bodyController.view.left = 320;
     bodyController.view.top = 0;
-    monthController.view.left = 320;
+    monthController.view.left = 0;
     monthController.view.top = 0;
     
     [horizontalScrollView addSubview:bodyController.view];

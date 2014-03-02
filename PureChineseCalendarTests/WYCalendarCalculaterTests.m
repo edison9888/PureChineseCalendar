@@ -35,7 +35,7 @@
 - (void)testCalendarCalculater
 {
     WYCalendarCalculater *calendar = [WYCalendarCalculater shareInstance];
-    NSDictionary *calendarInfo = [calendar solarToLunarWithYear:2014 month:2 day:16];
+    NSDictionary *calendarInfo = [calendar solarToLunarWithYear:1888 month:2 day:16];
     
     NSArray *allKeys = calendarInfo.allKeys;
     for (int i = 0; i < allKeys.count; i++) {

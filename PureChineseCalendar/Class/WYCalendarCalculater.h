@@ -70,5 +70,21 @@
                                   month:(NSInteger)month
                                     day:(NSInteger)day;
 
+/**
+ *  取得今天的农历信息
+ */
 - (NSDictionary *)lunarOfToday;
+
+/*
+ *   某个阴历月的天数
+ *
+ *  @param lunarMonth       阴历月
+ *  @param lunarYear        阴历年
+ *  @param leap             该阴历月是否为闰月
+ *
+ *  @return 所查询阴历月的天数
+ */
+- (NSInteger)daysOfLunarMonth:(NSInteger)lunarMonth
+                 forLunarYear:(NSInteger)lunarYear
+                  isLeapMonth:(BOOL)leap;
 @end
