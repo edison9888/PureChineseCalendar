@@ -28,6 +28,7 @@
 		D34178D0189F218300E64EBB /* WYToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34178CF189F218300E64EBB /* WYToolViewController.m */; };
 		D34178D3189F21AC00E64EBB /* WYCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34178D2189F21AC00E64EBB /* WYCalendarViewController.m */; };
 		D34178D6189F250800E64EBB /* WYWillPresentLockViewSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = D34178D5189F250800E64EBB /* WYWillPresentLockViewSegue.m */; };
+		D353B31218C307610018BF62 /* WYParallaxMotion.m in Sources */ = {isa = PBXBuildFile; fileRef = D353B31118C307610018BF62 /* WYParallaxMotion.m */; };
 		D36F8E1818ADA10900551997 /* calendar-converter.js in Resources */ = {isa = PBXBuildFile; fileRef = D36F8E1518ADA10900551997 /* calendar-converter.js */; };
 		D36F8E1918ADA10900551997 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D36F8E1618ADA10900551997 /* MIT-LICENSE.txt */; };
 		D36F8E1A18ADA10900551997 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D36F8E1718ADA10900551997 /* README.md */; };
@@ -82,6 +83,8 @@
 		D34178D2189F21AC00E64EBB /* WYCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYCalendarViewController.m; path = Class/CalendarController/WYCalendarViewController.m; sourceTree = "<group>"; };
 		D34178D4189F250800E64EBB /* WYWillPresentLockViewSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYWillPresentLockViewSegue.h; path = Class/ToolController/WYWillPresentLockViewSegue.h; sourceTree = "<group>"; };
 		D34178D5189F250800E64EBB /* WYWillPresentLockViewSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYWillPresentLockViewSegue.m; path = Class/ToolController/WYWillPresentLockViewSegue.m; sourceTree = "<group>"; };
+		D353B31018C307610018BF62 /* WYParallaxMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYParallaxMotion.h; path = Class/WYParallaxMotion.h; sourceTree = "<group>"; };
+		D353B31118C307610018BF62 /* WYParallaxMotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYParallaxMotion.m; path = Class/WYParallaxMotion.m; sourceTree = "<group>"; };
 		D36F8E1518ADA10900551997 /* calendar-converter.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "calendar-converter.js"; sourceTree = "<group>"; };
 		D36F8E1618ADA10900551997 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		D36F8E1718ADA10900551997 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 		D34178CC189F0DF600E64EBB /* ResuseView */ = {
 			isa = PBXGroup;
 			children = (
+				D353B31018C307610018BF62 /* WYParallaxMotion.h */,
+				D353B31118C307610018BF62 /* WYParallaxMotion.m */,
 			);
 			name = ResuseView;
 			sourceTree = "<group>";
@@ -447,6 +452,7 @@
 				D37B963F18B0B20500623499 /* UIView+Utils.m in Sources */,
 				D34178D6189F250800E64EBB /* WYWillPresentLockViewSegue.m in Sources */,
 				D30CEF18189D18A00088CCE4 /* WYLockView.m in Sources */,
+				D353B31218C307610018BF62 /* WYParallaxMotion.m in Sources */,
 				D3B3B3DB18A2681700C30BD3 /* WYBodyViewController.m in Sources */,
 				D37B963618B0AA3400623499 /* WYCurrentMonthController.m in Sources */,
 				D34178D3189F21AC00E64EBB /* WYCalendarViewController.m in Sources */,
