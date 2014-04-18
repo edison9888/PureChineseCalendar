@@ -7,7 +7,7 @@
 //
 
 #import "WYCurrentMonthView.h"
-#import "WYCalendarCalculater.h"
+#import "DeviceCommon.h"
 
 @implementation WYCurrentMonthView
 
@@ -15,7 +15,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self lunarDateOfToday];
+        
     }
     
     return self;
@@ -32,53 +32,61 @@
     CGContextMoveToPoint(context, 40, 80);
     CGContextAddLineToPoint(context, 40, 300);
     CGContextStrokePath(context);
+
+
+//    //NO.1画一条线
+//
+//    CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);//线条颜色
+//    CGContextMoveToPoint(context, 20, 20);
+//    CGContextAddLineToPoint(context, 200,20);
+//    CGContextStrokePath(context);
+//
+//
+//
+//    CGContextSetLineWidth(context, 1.0);
+//    CGContextSetRGBFillColor (context, 0.5, 0.5, 0.5, 0.5);
     
     
-    //NO.1画一条线
-     
-     CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);//线条颜色
-     CGContextMoveToPoint(context, 20, 20);
-     CGContextAddLineToPoint(context, 200,20);
-     CGContextStrokePath(context);
+    NSDate *date = [NSDate date];
+    
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+
+    NSInteger year = [dateComponents year];
+    NSInteger month = [dateComponents month];
     
     
     
     
-    /*NO.2写文字
-     
-     CGContextSetLineWidth(context, 1.0);
-     CGContextSetRGBFillColor (context, 0.5, 0.5, 0.5, 0.5);
-     UIFont  *font = [UIFont boldSystemFontOfSize:18.0];
-     [@"公司：北京中软科技股份有限公司\n部门：ERP事业部\n姓名：McLiang" drawInRect:CGRectMake(20, 40, 280, 300) withFont:font];
-     */
     
+    
+    for (NSUInteger i = 1; i <= days.length; i++) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-d"];
+        NSString *dateString = [NSString stringWithFormat:@"%d-%d-%d", year, month, i];
+        NSDate *tempDate = [formatter dateFromString:dateString];
+        
+        NSCalendar *chineseCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSChineseCalendar];
+        NSDateComponents *tempDateComponents = [chineseCalendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:tempDate];
+        
+        NSString *dayString = [NSString stringWithFormat:@"%d", [tempDateComponents day]];
+        float x = (i%7) * 30;
+        float y = 20 * (i/7) + 100;
+        CGPoint point = CGPointMake(x, y);
+        [dayString drawAtPoint:point withAttributes:
+         @{
+           NSForegroundColorAttributeName: [UIColor colorWithRed:83.0/255 green:79.0/255 blue:78.0/255 alpha:1.0],
+           NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:13.0]}];
+    }
+
 }
 
 - (void)lunarDateOfToday
 {
-    NSDictionary *lunarInfo = [[WYCalendarCalculater shareInstance] lunarOfToday];
-    ///星期、月、日、阴历月、阴历日
-    // 公历：比如得到今天是13号，往前数到1，往后数到这个月末。
-    // 农历：比如得到初五，往前数
-    NSString *solarDayString = lunarInfo[@"sDay"];
-    
-    int solarDayNumber = [solarDayString intValue];
-    
-    int leftOffset = solarDayNumber - 1;
-    
-    // 得到公历的这个月有多少天
-    NSDate *today = [NSDate date]; //Get a date object for today's date
-    NSCalendar *c = [NSCalendar currentCalendar];
-    NSRange days = [c rangeOfUnit:NSDayCalendarUnit
-                           inUnit:NSMonthCalendarUnit
-                          forDate:today];
-    
-    int rightOffset = days.length - solarDayNumber;
-    
-    // 使用这两个offset可以从lunarDays中取出对应的
-    
-
-    // 得到农历的这个月有多少天
+  
     
 }
 @end
