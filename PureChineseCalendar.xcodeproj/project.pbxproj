@@ -22,11 +22,10 @@
 		D30CEEE6189B4D720088CCE4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30CEEC8189B4D720088CCE4 /* UIKit.framework */; };
 		D30CEEEE189B4D720088CCE4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D30CEEEC189B4D720088CCE4 /* InfoPlist.strings */; };
 		D30CEEF0189B4D720088CCE4 /* PureChineseCalendarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D30CEEEF189B4D720088CCE4 /* PureChineseCalendarTests.m */; };
-		D30CEEFA189B56380088CCE4 /* 原则 in Resources */ = {isa = PBXBuildFile; fileRef = D30CEEF9189B56380088CCE4 /* 原则 */; };
-		D30CEEFE189B89BA0088CCE4 /* testCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = D30CEEFD189B89BA0088CCE4 /* testCalendar.png */; };
 		D353B31218C307610018BF62 /* WYParallaxMotion.m in Sources */ = {isa = PBXBuildFile; fileRef = D353B31118C307610018BF62 /* WYParallaxMotion.m */; };
 		D37B963218B0A9C200623499 /* WYHorizontalScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37B963118B0A9C200623499 /* WYHorizontalScrollViewController.m */; };
 		D37B963618B0AA3400623499 /* WYCurrentMonthController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37B963518B0AA3400623499 /* WYCurrentMonthController.m */; };
+		D38857E91909D3BC002EC616 /* WYLunarMap.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857E81909D3BC002EC616 /* WYLunarMap.m */; };
 		D3B3B3DB18A2681700C30BD3 /* WYBodyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3B3DA18A2681700C30BD3 /* WYBodyViewController.m */; };
 		D3B7E3311900A3F1006AB9D8 /* UIView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B7E3301900A3F1006AB9D8 /* UIView+Utils.m */; };
 		D3EBBFB418AE60910053799A /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3EBBFB318AE60910053799A /* JavaScriptCore.framework */; };
@@ -64,8 +63,6 @@
 		D30CEEEB189B4D720088CCE4 /* PureChineseCalendarTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PureChineseCalendarTests-Info.plist"; sourceTree = "<group>"; };
 		D30CEEED189B4D720088CCE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D30CEEEF189B4D720088CCE4 /* PureChineseCalendarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PureChineseCalendarTests.m; sourceTree = "<group>"; };
-		D30CEEF9189B56380088CCE4 /* 原则 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "原则"; sourceTree = "<group>"; };
-		D30CEEFD189B89BA0088CCE4 /* testCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testCalendar.png; sourceTree = "<group>"; };
 		D353B31018C307610018BF62 /* WYParallaxMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYParallaxMotion.h; path = Class/WYParallaxMotion.h; sourceTree = "<group>"; };
 		D353B31118C307610018BF62 /* WYParallaxMotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYParallaxMotion.m; path = Class/WYParallaxMotion.m; sourceTree = "<group>"; };
 		D37B963018B0A9C200623499 /* WYHorizontalScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYHorizontalScrollViewController.h; path = Class/WYHorizontalScrollViewController.h; sourceTree = "<group>"; };
@@ -74,6 +71,8 @@
 		D37B963518B0AA3400623499 /* WYCurrentMonthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYCurrentMonthController.m; path = Class/WYCurrentMonthController.m; sourceTree = "<group>"; };
 		D37B964218B0B36E00623499 /* DeviceCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommon.h; sourceTree = "<group>"; };
 		D37B964318B0B76400623499 /* CalendarKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarKey.h; sourceTree = "<group>"; };
+		D38857E71909D3BC002EC616 /* WYLunarMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLunarMap.h; sourceTree = "<group>"; };
+		D38857E81909D3BC002EC616 /* WYLunarMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLunarMap.m; sourceTree = "<group>"; };
 		D3B3B3D918A2681700C30BD3 /* WYBodyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYBodyViewController.h; path = Class/BodyController/WYBodyViewController.h; sourceTree = "<group>"; };
 		D3B3B3DA18A2681700C30BD3 /* WYBodyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYBodyViewController.m; path = Class/BodyController/WYBodyViewController.m; sourceTree = "<group>"; };
 		D3B7E32F1900A3F1006AB9D8 /* UIView+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utils.h"; sourceTree = "<group>"; };
@@ -147,12 +146,10 @@
 				D34178CC189F0DF600E64EBB /* ResuseView */,
 				D30CEED6189B4D720088CCE4 /* Main.storyboard */,
 				D30CEF07189CC0AB0088CCE4 /* VC */,
-				D30CEEFD189B89BA0088CCE4 /* testCalendar.png */,
 				D30CEED3189B4D720088CCE4 /* WYAppDelegate.h */,
 				D30CEED4189B4D720088CCE4 /* WYAppDelegate.m */,
 				D30CEEDC189B4D720088CCE4 /* Images.xcassets */,
 				D30CEECB189B4D720088CCE4 /* Supporting Files */,
-				D30CEEF9189B56380088CCE4 /* 原则 */,
 			);
 			path = PureChineseCalendar;
 			sourceTree = "<group>";
@@ -222,6 +219,8 @@
 				D37B963518B0AA3400623499 /* WYCurrentMonthController.m */,
 				1E3BAA8718BCDEEE00C697D6 /* WYCurrentMonthView.h */,
 				1E3BAA8818BCDEEE00C697D6 /* WYCurrentMonthView.m */,
+				D38857E71909D3BC002EC616 /* WYLunarMap.h */,
+				D38857E81909D3BC002EC616 /* WYLunarMap.m */,
 			);
 			name = "Current Month Controller";
 			sourceTree = "<group>";
@@ -324,9 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D30CEEDD189B4D720088CCE4 /* Images.xcassets in Resources */,
-				D30CEEFE189B89BA0088CCE4 /* testCalendar.png in Resources */,
 				D30CEECF189B4D720088CCE4 /* InfoPlist.strings in Resources */,
-				D30CEEFA189B56380088CCE4 /* 原则 in Resources */,
 				D30CEED8189B4D720088CCE4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +347,7 @@
 				D30CEED1189B4D720088CCE4 /* main.m in Sources */,
 				D37B963218B0A9C200623499 /* WYHorizontalScrollViewController.m in Sources */,
 				D353B31218C307610018BF62 /* WYParallaxMotion.m in Sources */,
+				D38857E91909D3BC002EC616 /* WYLunarMap.m in Sources */,
 				D3B3B3DB18A2681700C30BD3 /* WYBodyViewController.m in Sources */,
 				D37B963618B0AA3400623499 /* WYCurrentMonthController.m in Sources */,
 				D3B7E3311900A3F1006AB9D8 /* UIView+Utils.m in Sources */,
