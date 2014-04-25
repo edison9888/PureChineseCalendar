@@ -51,6 +51,8 @@
     lunarMonthLabel.text = [NSString stringWithFormat:@"%@ %@", lunarMonth, lunarDay];
     solarDayLabel.text = dateString;
     
+    
+
 }
 
 - (void)didReceiveMemoryWarning

@@ -11,7 +11,8 @@
 #import "WYCurrentMonthController.h"
 #import "UIView+Utils.h"
 #import "DeviceCommon.h"
-//@import <UIImage+BlurredFrame.h>
+#import "WYParallaxMotion.h"
+
 #import <UIImage+BlurredFrame.h>
 @interface WYHorizontalScrollViewController ()
 {
@@ -44,6 +45,8 @@
     CGRect frame = CGRectMake(0, 0, img.size.width, img.size.height);
     
     backImageView.image = [img applyLightEffectAtFrame:frame];
+    
+    [WYParallaxMotion addParallaxMotionForView:backImageView];
 }
 
 - (void)didReceiveMemoryWarning

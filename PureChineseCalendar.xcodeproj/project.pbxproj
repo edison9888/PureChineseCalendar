@@ -25,6 +25,7 @@
 		D30CEEF0189B4D720088CCE4 /* PureChineseCalendarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D30CEEEF189B4D720088CCE4 /* PureChineseCalendarTests.m */; };
 		D31A0FDD190A38050000964B /* backImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D31A0FDB190A38050000964B /* backImage.png */; };
 		D31A0FDE190A38050000964B /* backImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D31A0FDC190A38050000964B /* backImage@2x.png */; };
+		D31A0FE0190A42390000964B /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = D31A0FDF190A42390000964B /* iTunesArtwork */; };
 		D353B31218C307610018BF62 /* WYParallaxMotion.m in Sources */ = {isa = PBXBuildFile; fileRef = D353B31118C307610018BF62 /* WYParallaxMotion.m */; };
 		D37B963218B0A9C200623499 /* WYHorizontalScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37B963118B0A9C200623499 /* WYHorizontalScrollViewController.m */; };
 		D37B963618B0AA3400623499 /* WYCurrentMonthController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37B963518B0AA3400623499 /* WYCurrentMonthController.m */; };
@@ -70,6 +71,8 @@
 		D30CEEEF189B4D720088CCE4 /* PureChineseCalendarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PureChineseCalendarTests.m; sourceTree = "<group>"; };
 		D31A0FDB190A38050000964B /* backImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backImage.png; sourceTree = "<group>"; };
 		D31A0FDC190A38050000964B /* backImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backImage@2x.png"; sourceTree = "<group>"; };
+		D31A0FDF190A42390000964B /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		D31A0FE1190A42420000964B /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		D353B31018C307610018BF62 /* WYParallaxMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYParallaxMotion.h; path = Class/WYParallaxMotion.h; sourceTree = "<group>"; };
 		D353B31118C307610018BF62 /* WYParallaxMotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYParallaxMotion.m; path = Class/WYParallaxMotion.m; sourceTree = "<group>"; };
 		D37B963018B0A9C200623499 /* WYHorizontalScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYHorizontalScrollViewController.h; path = Class/WYHorizontalScrollViewController.h; sourceTree = "<group>"; };
@@ -77,7 +80,6 @@
 		D37B963418B0AA3400623499 /* WYCurrentMonthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYCurrentMonthController.h; path = Class/WYCurrentMonthController.h; sourceTree = "<group>"; };
 		D37B963518B0AA3400623499 /* WYCurrentMonthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYCurrentMonthController.m; path = Class/WYCurrentMonthController.m; sourceTree = "<group>"; };
 		D37B964218B0B36E00623499 /* DeviceCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommon.h; sourceTree = "<group>"; };
-		D37B964318B0B76400623499 /* CalendarKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarKey.h; sourceTree = "<group>"; };
 		D38857E71909D3BC002EC616 /* WYLunarMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLunarMap.h; sourceTree = "<group>"; };
 		D38857E81909D3BC002EC616 /* WYLunarMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLunarMap.m; sourceTree = "<group>"; };
 		D3B3B3D918A2681700C30BD3 /* WYBodyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYBodyViewController.h; path = Class/BodyController/WYBodyViewController.h; sourceTree = "<group>"; };
@@ -152,15 +154,12 @@
 		D30CEECA189B4D720088CCE4 /* PureChineseCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				D37B964118B0B36E00623499 /* Global */,
-				D34178CC189F0DF600E64EBB /* ResuseView */,
 				D30CEED6189B4D720088CCE4 /* Main.storyboard */,
-				D30CEF07189CC0AB0088CCE4 /* VC */,
 				D30CEED3189B4D720088CCE4 /* WYAppDelegate.h */,
 				D30CEED4189B4D720088CCE4 /* WYAppDelegate.m */,
-				D30CEEDC189B4D720088CCE4 /* Images.xcassets */,
-				D31A0FDB190A38050000964B /* backImage.png */,
-				D31A0FDC190A38050000964B /* backImage@2x.png */,
+				D30CEF07189CC0AB0088CCE4 /* VC */,
+				D37B964118B0B36E00623499 /* Global */,
+				D34178CC189F0DF600E64EBB /* ResuseView */,
 				D30CEECB189B4D720088CCE4 /* Supporting Files */,
 			);
 			path = PureChineseCalendar;
@@ -169,6 +168,11 @@
 		D30CEECB189B4D720088CCE4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D31A0FDF190A42390000964B /* iTunesArtwork */,
+				D31A0FE1190A42420000964B /* iTunesArtwork@2x */,
+				D30CEEDC189B4D720088CCE4 /* Images.xcassets */,
+				D31A0FDB190A38050000964B /* backImage.png */,
+				D31A0FDC190A38050000964B /* backImage@2x.png */,
 				D30CEECC189B4D720088CCE4 /* PureChineseCalendar-Info.plist */,
 				D30CEECD189B4D720088CCE4 /* InfoPlist.strings */,
 				D30CEED0189B4D720088CCE4 /* main.m */,
@@ -243,7 +247,6 @@
 				D3B7E32F1900A3F1006AB9D8 /* UIView+Utils.h */,
 				D3B7E3301900A3F1006AB9D8 /* UIView+Utils.m */,
 				D37B964218B0B36E00623499 /* DeviceCommon.h */,
-				D37B964318B0B76400623499 /* CalendarKey.h */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D30CEEDD189B4D720088CCE4 /* Images.xcassets in Resources */,
+				D31A0FE0190A42390000964B /* iTunesArtwork in Resources */,
 				D30CEECF189B4D720088CCE4 /* InfoPlist.strings in Resources */,
 				D31A0FDD190A38050000964B /* backImage.png in Resources */,
 				D30CEED8189B4D720088CCE4 /* Main.storyboard in Resources */,

@@ -13,10 +13,10 @@
 #define LEFT            40
 #define WEEK_TOP        90
 #define WIDTH           35
-#define HEIGHT          35
+#define HEIGHT          40
 
-#define SOLAR_TOP       (WEEK_TOP + 20)
-#define LUNAR_TOP       (WEEK_TOP + 35)
+#define SOLAR_TOP       (WEEK_TOP + 30)
+#define LUNAR_TOP       (WEEK_TOP + 45)
 @implementation WYCurrentMonthView
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -46,12 +46,14 @@
     // 通过系统的格里高历，再转为中国农历
     NSDate *date = [NSDate date];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:date];
     NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+    
     NSInteger year = [dateComponents year];
     NSInteger month = [dateComponents month];
     NSInteger today = [dateComponents day];
-
+    NSUInteger todayWeekday = [dateComponents weekday];
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-d"];
     
@@ -59,7 +61,6 @@
     
     NSDictionary *fontAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0],NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:13.0]};
 
-    
     for (NSUInteger i = 0; i < 7; i++) {
         float x = LEFT + i * WIDTH;
         float y = WEEK_TOP ;
@@ -67,30 +68,37 @@
         [[WYLunarMap instance].weeks[i] drawAtPoint:point withAttributes:fontAttributes];
     }
     
-    
+    int step = 0;
     for (NSUInteger i = 1; i <= days.length; i++) {
         
-        NSString *dateString = [NSString stringWithFormat:@"%d-%d-%d", year, month, i];
-        NSDate *tempDate = [formatter dateFromString:dateString];
-        NSDateComponents *tempDateComponents = [chineseCalendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:tempDate];
+        NSString *solarDateString = [NSString stringWithFormat:@"%ld-%ld-%lu", (long)year, (long)month, (unsigned long)i];
+        NSDate *solarDate = [formatter dateFromString:solarDateString];
+        NSDateComponents *solarDateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:solarDate];
+        NSUInteger weekday = [solarDateComponents weekday];
         
-        NSString *lunarDay = [WYLunarMap instance].arrayDay[[tempDateComponents day] - 1];
+        NSDateComponents *lunarDateComponents = [chineseCalendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:solarDate];
         
+        NSString *lunarDay = [WYLunarMap instance].arrayDay[[lunarDateComponents day] - 1];
         
-        float x = LEFT + (i%7) * WIDTH;
-        float solarY = SOLAR_TOP + (i/7) * HEIGHT;
-        NSString *solarDay = [NSString stringWithFormat:@"%d", i];
+        float x = LEFT + (weekday-1) * WIDTH;
+        
+        float solarY = SOLAR_TOP + step * HEIGHT;
+        
+        NSString *solarDay = [NSString stringWithFormat:@"%lu", (unsigned long)i];
         [solarDay drawAtPoint:CGPointMake(x, solarY) withAttributes:fontAttributes];
 
-        float lunarY = LUNAR_TOP + (i/7) * HEIGHT;
+        float lunarY = LUNAR_TOP + step * HEIGHT;
         [lunarDay drawAtPoint:CGPointMake(x, lunarY) withAttributes:fontAttributes];
+        
+        if (weekday == 7) {
+            step ++;
+        }
     }
     
-    CGPoint point = CGPointMake(LEFT + (today%7) * WIDTH, LUNAR_TOP + (today/7) * HEIGHT);
+    CGPoint point = CGPointMake(LEFT + (todayWeekday - 1) * WIDTH, LUNAR_TOP + (today/7) * HEIGHT);
     CGRect ellipseRect = CGRectMake(point.x - 10, point.y - 10, WIDTH, WIDTH);
 
-    //NO.1画一条线
-    
+    // 画圈
     CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);//线条颜色
     CGContextAddEllipseInRect(context, ellipseRect);
     CGContextSetLineWidth(context, 1.0);
