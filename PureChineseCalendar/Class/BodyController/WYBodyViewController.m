@@ -48,11 +48,9 @@
     formatter.dateFormat = @"yyyy - M - d   EEEE";
     NSString* dateString = [formatter stringFromDate:date];
     
-    lunarMonthLabel.text = [NSString stringWithFormat:@"%@ %@", lunarMonth, lunarDay];
+    lunarMonthLabel.text = [NSString stringWithFormat:@"%@   %@", lunarMonth, lunarDay];
     solarDayLabel.text = dateString;
     
-    
-
 }
 
 - (void)didReceiveMemoryWarning

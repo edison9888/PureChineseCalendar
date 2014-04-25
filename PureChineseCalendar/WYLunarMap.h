@@ -22,6 +22,5 @@
 @property (nonatomic, strong) NSCalendar *gregorianCalendar;
 @property (nonatomic, strong) NSCalendar *chineseCalendar;
 
-
 + (instancetype) instance;
 @end

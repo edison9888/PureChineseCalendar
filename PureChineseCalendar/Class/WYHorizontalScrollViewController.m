@@ -45,8 +45,6 @@
     CGRect frame = CGRectMake(0, 0, img.size.width, img.size.height);
     
     backImageView.image = [img applyLightEffectAtFrame:frame];
-    
-    [WYParallaxMotion addParallaxMotionForView:backImageView];
 }
 
 - (void)didReceiveMemoryWarning
