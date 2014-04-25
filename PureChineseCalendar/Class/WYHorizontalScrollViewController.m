@@ -11,10 +11,12 @@
 #import "WYCurrentMonthController.h"
 #import "UIView+Utils.h"
 #import "DeviceCommon.h"
-
+//@import <UIImage+BlurredFrame.h>
+#import <UIImage+BlurredFrame.h>
 @interface WYHorizontalScrollViewController ()
 {
     __weak IBOutlet UIScrollView *horizontalScrollView;
+    __weak IBOutlet UIImageView *backImageView;
     
 }
 @end
@@ -37,6 +39,11 @@
     
     [horizontalScrollView addSubview:bodyController.view];
     [horizontalScrollView addSubview:monthController.view];
+    
+    UIImage *img = [UIImage imageNamed:@"backImage"];
+    CGRect frame = CGRectMake(0, 0, img.size.width, img.size.height);
+    
+    backImageView.image = [img applyLightEffectAtFrame:frame];
 }
 
 - (void)didReceiveMemoryWarning

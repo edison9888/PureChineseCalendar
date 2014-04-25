@@ -9,12 +9,19 @@
 #import <Foundation/Foundation.h>
 
 @interface WYLunarMap : NSObject
-@property (nonatomic, strong) NSArray *heavenlyStems;
-@property (nonatomic, strong) NSArray *earthlyBranches;
-@property (nonatomic, strong) NSArray *lunarZodiac;
-@property (nonatomic, strong) NSArray *solarTerms;
-@property (nonatomic, strong) NSArray *arrayMonth;
-@property (nonatomic, strong) NSArray *arrayDay;
-@property (nonatomic, strong) NSArray *weeks;
+
+// 一些常量
+@property (nonatomic, strong, readonly) NSArray *heavenlyStems;
+@property (nonatomic, strong, readonly) NSArray *earthlyBranches;
+@property (nonatomic, strong, readonly) NSArray *lunarZodiac;
+@property (nonatomic, strong, readonly) NSArray *solarTerms;
+@property (nonatomic, strong, readonly) NSArray *arrayMonth;
+@property (nonatomic, strong, readonly) NSArray *arrayDay;
+@property (nonatomic, strong, readonly) NSArray *weeks;
+
+@property (nonatomic, strong) NSCalendar *gregorianCalendar;
+@property (nonatomic, strong) NSCalendar *chineseCalendar;
+
+
 + (instancetype) instance;
 @end
