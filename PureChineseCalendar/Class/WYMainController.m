@@ -38,9 +38,8 @@
     [super viewDidLoad];
 
     // 背影
-    UIImage *img = [UIImage imageNamed:@"backImage"];
-    CGRect frame = CGRectMake(0, 0, img.size.width, img.size.height);
-    backImageView.image = [img applyLightEffectAtFrame:frame];
+//    UIImage *img = [UIImage imageNamed:@"backImage"];
+//    backImageView.image = img;
     
     // 视差效果
     [WYParallaxMotion addParallaxMotionForView:lunarMonthLabel];
@@ -72,7 +71,7 @@
     verticalScrollView.contentSize = verticalScrollView.bounds.size;
     
     WYCurrentMonthView *monthView = [[WYCurrentMonthView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
-    monthView.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.3];
+    monthView.backgroundColor = [UIColor clearColor];
     [verticalScrollView addSubview:monthView];
 }
 
