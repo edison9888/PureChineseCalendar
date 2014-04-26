@@ -11,7 +11,7 @@
 #import "WYLunarMap.h"
 
 #define LEFT            30
-#define WEEK_TOP        90
+#define WEEK_TOP        30
 #define WIDTH           40
 #define HEIGHT          40
 
@@ -70,6 +70,8 @@
     }
     
     
+//    year = 2012;
+//    month = 8;
     int step = 0;
     for (NSUInteger i = 1; i <= days.length; i++) {
         

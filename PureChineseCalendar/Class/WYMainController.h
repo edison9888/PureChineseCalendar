@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WYHorizontalScrollViewController : UIViewController
+@interface WYMainController : UIViewController
 
 @end

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1E0E5E5818B8218F003B20BE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0E5E5718B8218F003B20BE /* CoreMotion.framework */; };
-		1E3BAA8918BCDEEE00C697D6 /* WYCurrentMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BAA8818BCDEEE00C697D6 /* WYCurrentMonthView.m */; };
 		53ACFBD2E8334BEBB0F37E9F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 030279D716F043DEB0F60942 /* libPods.a */; };
 		D30CEEC5189B4D720088CCE4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30CEEC4189B4D720088CCE4 /* Foundation.framework */; };
 		D30CEEC7189B4D720088CCE4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30CEEC6189B4D720088CCE4 /* CoreGraphics.framework */; };
@@ -27,11 +26,11 @@
 		D31A0FDE190A38050000964B /* backImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D31A0FDC190A38050000964B /* backImage@2x.png */; };
 		D31A0FE0190A42390000964B /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = D31A0FDF190A42390000964B /* iTunesArtwork */; };
 		D353B31218C307610018BF62 /* WYParallaxMotion.m in Sources */ = {isa = PBXBuildFile; fileRef = D353B31118C307610018BF62 /* WYParallaxMotion.m */; };
-		D37B963218B0A9C200623499 /* WYHorizontalScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37B963118B0A9C200623499 /* WYHorizontalScrollViewController.m */; };
-		D37B963618B0AA3400623499 /* WYCurrentMonthController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37B963518B0AA3400623499 /* WYCurrentMonthController.m */; };
+		D37B963218B0A9C200623499 /* WYMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37B963118B0A9C200623499 /* WYMainController.m */; };
 		D38857E91909D3BC002EC616 /* WYLunarMap.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857E81909D3BC002EC616 /* WYLunarMap.m */; };
-		D3B3B3DB18A2681700C30BD3 /* WYBodyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B3B3DA18A2681700C30BD3 /* WYBodyViewController.m */; };
 		D3B7E3311900A3F1006AB9D8 /* UIView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B7E3301900A3F1006AB9D8 /* UIView+Utils.m */; };
+		D3C08D8B190B5A3500377905 /* WYCurrentMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C08D8A190B5A3500377905 /* WYCurrentMonthView.m */; };
+		D3C08D8D190B5B0800377905 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8C190B5B0800377905 /* README.md */; };
 		D3EBBFB418AE60910053799A /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3EBBFB318AE60910053799A /* JavaScriptCore.framework */; };
 		D3EBBFBF18B08C780053799A /* WYCalendarCalculaterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EBBFBE18B08C780053799A /* WYCalendarCalculaterTests.m */; };
 /* End PBXBuildFile section */
@@ -49,8 +48,6 @@
 /* Begin PBXFileReference section */
 		030279D716F043DEB0F60942 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E0E5E5718B8218F003B20BE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		1E3BAA8718BCDEEE00C697D6 /* WYCurrentMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYCurrentMonthView.h; path = Class/WYCurrentMonthView.h; sourceTree = "<group>"; };
-		1E3BAA8818BCDEEE00C697D6 /* WYCurrentMonthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYCurrentMonthView.m; path = Class/WYCurrentMonthView.m; sourceTree = "<group>"; };
 		1E548ACF3D8A4730A7F6084B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		D30CEEC1189B4D720088CCE4 /* PureChineseCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PureChineseCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30CEEC4189B4D720088CCE4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -75,17 +72,16 @@
 		D31A0FE1190A42420000964B /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		D353B31018C307610018BF62 /* WYParallaxMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYParallaxMotion.h; path = Class/WYParallaxMotion.h; sourceTree = "<group>"; };
 		D353B31118C307610018BF62 /* WYParallaxMotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYParallaxMotion.m; path = Class/WYParallaxMotion.m; sourceTree = "<group>"; };
-		D37B963018B0A9C200623499 /* WYHorizontalScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYHorizontalScrollViewController.h; path = Class/WYHorizontalScrollViewController.h; sourceTree = "<group>"; };
-		D37B963118B0A9C200623499 /* WYHorizontalScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYHorizontalScrollViewController.m; path = Class/WYHorizontalScrollViewController.m; sourceTree = "<group>"; };
-		D37B963418B0AA3400623499 /* WYCurrentMonthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYCurrentMonthController.h; path = Class/WYCurrentMonthController.h; sourceTree = "<group>"; };
-		D37B963518B0AA3400623499 /* WYCurrentMonthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYCurrentMonthController.m; path = Class/WYCurrentMonthController.m; sourceTree = "<group>"; };
+		D37B963018B0A9C200623499 /* WYMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYMainController.h; path = Class/WYMainController.h; sourceTree = "<group>"; };
+		D37B963118B0A9C200623499 /* WYMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYMainController.m; path = Class/WYMainController.m; sourceTree = "<group>"; };
 		D37B964218B0B36E00623499 /* DeviceCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommon.h; sourceTree = "<group>"; };
 		D38857E71909D3BC002EC616 /* WYLunarMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLunarMap.h; sourceTree = "<group>"; };
 		D38857E81909D3BC002EC616 /* WYLunarMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLunarMap.m; sourceTree = "<group>"; };
-		D3B3B3D918A2681700C30BD3 /* WYBodyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYBodyViewController.h; path = Class/BodyController/WYBodyViewController.h; sourceTree = "<group>"; };
-		D3B3B3DA18A2681700C30BD3 /* WYBodyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYBodyViewController.m; path = Class/BodyController/WYBodyViewController.m; sourceTree = "<group>"; };
 		D3B7E32F1900A3F1006AB9D8 /* UIView+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utils.h"; sourceTree = "<group>"; };
 		D3B7E3301900A3F1006AB9D8 /* UIView+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utils.m"; sourceTree = "<group>"; };
+		D3C08D89190B5A3500377905 /* WYCurrentMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYCurrentMonthView.h; sourceTree = "<group>"; };
+		D3C08D8A190B5A3500377905 /* WYCurrentMonthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYCurrentMonthView.m; sourceTree = "<group>"; };
+		D3C08D8C190B5B0800377905 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D3EBBFB318AE60910053799A /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		D3EBBFBE18B08C780053799A /* WYCalendarCalculaterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYCalendarCalculaterTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +116,7 @@
 		D30CEEB8189B4D720088CCE4 = {
 			isa = PBXGroup;
 			children = (
+				D3C08D8C190B5B0800377905 /* README.md */,
 				D30CEECA189B4D720088CCE4 /* PureChineseCalendar */,
 				D30CEEE9189B4D720088CCE4 /* PureChineseCalendarTests */,
 				D30CEEC3189B4D720088CCE4 /* Frameworks */,
@@ -155,11 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				D30CEED6189B4D720088CCE4 /* Main.storyboard */,
-				D30CEED3189B4D720088CCE4 /* WYAppDelegate.h */,
-				D30CEED4189B4D720088CCE4 /* WYAppDelegate.m */,
-				D30CEF07189CC0AB0088CCE4 /* VC */,
-				D37B964118B0B36E00623499 /* Global */,
-				D34178CC189F0DF600E64EBB /* ResuseView */,
+				D30CEF07189CC0AB0088CCE4 /* Class */,
 				D30CEECB189B4D720088CCE4 /* Supporting Files */,
 			);
 			path = PureChineseCalendar;
@@ -200,14 +193,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D30CEF07189CC0AB0088CCE4 /* VC */ = {
+		D30CEF07189CC0AB0088CCE4 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				D37B963318B0A9FB00623499 /* Current Month Controller */,
-				D37B962F18B0A8E000623499 /* Horizontal Scoll VC */,
-				D3B3B3D818A267D700C30BD3 /* Body Controller */,
+				D37B964118B0B36E00623499 /* Global */,
+				D34178CC189F0DF600E64EBB /* ResuseView */,
+				D37B962F18B0A8E000623499 /* Main */,
 			);
-			name = VC;
+			name = Class;
 			sourceTree = "<group>";
 		};
 		D34178CC189F0DF600E64EBB /* ResuseView */ = {
@@ -219,26 +212,19 @@
 			name = ResuseView;
 			sourceTree = "<group>";
 		};
-		D37B962F18B0A8E000623499 /* Horizontal Scoll VC */ = {
+		D37B962F18B0A8E000623499 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				D37B963018B0A9C200623499 /* WYHorizontalScrollViewController.h */,
-				D37B963118B0A9C200623499 /* WYHorizontalScrollViewController.m */,
-			);
-			name = "Horizontal Scoll VC";
-			sourceTree = "<group>";
-		};
-		D37B963318B0A9FB00623499 /* Current Month Controller */ = {
-			isa = PBXGroup;
-			children = (
-				D37B963418B0AA3400623499 /* WYCurrentMonthController.h */,
-				D37B963518B0AA3400623499 /* WYCurrentMonthController.m */,
-				1E3BAA8718BCDEEE00C697D6 /* WYCurrentMonthView.h */,
-				1E3BAA8818BCDEEE00C697D6 /* WYCurrentMonthView.m */,
+				D30CEED3189B4D720088CCE4 /* WYAppDelegate.h */,
+				D30CEED4189B4D720088CCE4 /* WYAppDelegate.m */,
+				D37B963018B0A9C200623499 /* WYMainController.h */,
+				D37B963118B0A9C200623499 /* WYMainController.m */,
 				D38857E71909D3BC002EC616 /* WYLunarMap.h */,
 				D38857E81909D3BC002EC616 /* WYLunarMap.m */,
+				D3C08D89190B5A3500377905 /* WYCurrentMonthView.h */,
+				D3C08D8A190B5A3500377905 /* WYCurrentMonthView.m */,
 			);
-			name = "Current Month Controller";
+			name = Main;
 			sourceTree = "<group>";
 		};
 		D37B964118B0B36E00623499 /* Global */ = {
@@ -249,15 +235,6 @@
 				D37B964218B0B36E00623499 /* DeviceCommon.h */,
 			);
 			path = Global;
-			sourceTree = "<group>";
-		};
-		D3B3B3D818A267D700C30BD3 /* Body Controller */ = {
-			isa = PBXGroup;
-			children = (
-				D3B3B3D918A2681700C30BD3 /* WYBodyViewController.h */,
-				D3B3B3DA18A2681700C30BD3 /* WYBodyViewController.m */,
-			);
-			name = "Body Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,6 +322,7 @@
 				D30CEEDD189B4D720088CCE4 /* Images.xcassets in Resources */,
 				D31A0FE0190A42390000964B /* iTunesArtwork in Resources */,
 				D30CEECF189B4D720088CCE4 /* InfoPlist.strings in Resources */,
+				D3C08D8D190B5B0800377905 /* README.md in Resources */,
 				D31A0FDD190A38050000964B /* backImage.png in Resources */,
 				D30CEED8189B4D720088CCE4 /* Main.storyboard in Resources */,
 				D31A0FDE190A38050000964B /* backImage@2x.png in Resources */,
@@ -401,13 +379,11 @@
 			files = (
 				D30CEED5189B4D720088CCE4 /* WYAppDelegate.m in Sources */,
 				D30CEED1189B4D720088CCE4 /* main.m in Sources */,
-				D37B963218B0A9C200623499 /* WYHorizontalScrollViewController.m in Sources */,
+				D3C08D8B190B5A3500377905 /* WYCurrentMonthView.m in Sources */,
+				D37B963218B0A9C200623499 /* WYMainController.m in Sources */,
 				D353B31218C307610018BF62 /* WYParallaxMotion.m in Sources */,
 				D38857E91909D3BC002EC616 /* WYLunarMap.m in Sources */,
-				D3B3B3DB18A2681700C30BD3 /* WYBodyViewController.m in Sources */,
-				D37B963618B0AA3400623499 /* WYCurrentMonthController.m in Sources */,
 				D3B7E3311900A3F1006AB9D8 /* UIView+Utils.m in Sources */,
-				1E3BAA8918BCDEEE00C697D6 /* WYCurrentMonthView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

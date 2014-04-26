@@ -11,10 +11,12 @@
 @interface WYLunarMap : NSObject
 
 // 一些常量
-@property (nonatomic, strong, readonly) NSArray *heavenlyStems;
-@property (nonatomic, strong, readonly) NSArray *earthlyBranches;
+//@property (nonatomic, strong, readonly) NSArray *heavenlyStems;
+//@property (nonatomic, strong, readonly) NSArray *earthlyBranches;
+//@property (nonatomic, strong, readonly) NSArray *solarTerms;
+
 @property (nonatomic, strong, readonly) NSArray *lunarZodiac;
-@property (nonatomic, strong, readonly) NSArray *solarTerms;
+@property (nonatomic, strong, readonly) NSArray *arrayYear;
 @property (nonatomic, strong, readonly) NSArray *arrayMonth;
 @property (nonatomic, strong, readonly) NSArray *arrayDay;
 @property (nonatomic, strong, readonly) NSArray *weeks;
