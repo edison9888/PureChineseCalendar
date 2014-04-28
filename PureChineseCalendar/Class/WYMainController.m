@@ -7,16 +7,17 @@
 //
 
 #import "WYMainController.h"
-
-//#import "UIView+Utils.h"
-//#import "DeviceCommon.h"
-#import "WYParallaxMotion.h"
-
-
 #import "WYCurrentMonthView.h"
 #import "WYLunarMap.h"
 
-#import <UIImage+BlurredFrame.h>
+
+//#import "UIView+Utils.h"
+//#import "DeviceCommon.h"
+//#import "WYParallaxMotion.h"
+
+
+
+
 
 
 @interface WYMainController ()
@@ -28,6 +29,7 @@
     __weak IBOutlet UILabel *lunarYearLabel;
     __weak IBOutlet UILabel *lunarMonthLabel;
     __weak IBOutlet UILabel *solarDayLabel;
+    __weak IBOutlet UIView *todayView;
 }
 @end
 
@@ -42,9 +44,9 @@
 //    backImageView.image = img;
     
     // 视差效果
-    [WYParallaxMotion addParallaxMotionForView:lunarMonthLabel];
-    [WYParallaxMotion addParallaxMotionForView:lunarMonthLabel];
-    [WYParallaxMotion addParallaxMotionForView:solarDayLabel];
+//    [WYParallaxMotion addParallaxMotionForView:lunarMonthLabel];
+//    [WYParallaxMotion addParallaxMotionForView:lunarMonthLabel];
+//    [WYParallaxMotion addParallaxMotionForView:solarDayLabel];
     
     // 显示今天农历日期
     NSDate *date = [NSDate date];

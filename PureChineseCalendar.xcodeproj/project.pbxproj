@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1E0E5E5818B8218F003B20BE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0E5E5718B8218F003B20BE /* CoreMotion.framework */; };
-		53ACFBD2E8334BEBB0F37E9F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 030279D716F043DEB0F60942 /* libPods.a */; };
 		D30CEEC5189B4D720088CCE4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30CEEC4189B4D720088CCE4 /* Foundation.framework */; };
 		D30CEEC7189B4D720088CCE4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30CEEC6189B4D720088CCE4 /* CoreGraphics.framework */; };
 		D30CEEC9189B4D720088CCE4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30CEEC8189B4D720088CCE4 /* UIKit.framework */; };
@@ -31,6 +30,7 @@
 		D3C08D8D190B5B0800377905 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8C190B5B0800377905 /* README.md */; };
 		D3C08D90190BEEAF00377905 /* backImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8E190BEEAF00377905 /* backImage@2x.png */; };
 		D3C08D91190BEEAF00377905 /* backImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8F190BEEAF00377905 /* backImage.png */; };
+		D3E62B08190E11200084C309 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E62B07190E11200084C309 /* CoreText.framework */; };
 		D3EBBFB418AE60910053799A /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3EBBFB318AE60910053799A /* JavaScriptCore.framework */; };
 		D3EBBFBF18B08C780053799A /* WYCalendarCalculaterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EBBFBE18B08C780053799A /* WYCalendarCalculaterTests.m */; };
 /* End PBXBuildFile section */
@@ -48,7 +48,6 @@
 /* Begin PBXFileReference section */
 		030279D716F043DEB0F60942 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E0E5E5718B8218F003B20BE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		1E548ACF3D8A4730A7F6084B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		D30CEEC1189B4D720088CCE4 /* PureChineseCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PureChineseCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30CEEC4189B4D720088CCE4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D30CEEC6189B4D720088CCE4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -82,6 +81,7 @@
 		D3C08D8C190B5B0800377905 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D3C08D8E190BEEAF00377905 /* backImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backImage@2x.png"; sourceTree = "<group>"; };
 		D3C08D8F190BEEAF00377905 /* backImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backImage.png; sourceTree = "<group>"; };
+		D3E62B07190E11200084C309 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		D3EBBFB318AE60910053799A /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		D3EBBFBE18B08C780053799A /* WYCalendarCalculaterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYCalendarCalculaterTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,12 +91,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3E62B08190E11200084C309 /* CoreText.framework in Frameworks */,
 				1E0E5E5818B8218F003B20BE /* CoreMotion.framework in Frameworks */,
 				D3EBBFB418AE60910053799A /* JavaScriptCore.framework in Frameworks */,
 				D30CEEC7189B4D720088CCE4 /* CoreGraphics.framework in Frameworks */,
 				D30CEEC9189B4D720088CCE4 /* UIKit.framework in Frameworks */,
 				D30CEEC5189B4D720088CCE4 /* Foundation.framework in Frameworks */,
-				53ACFBD2E8334BEBB0F37E9F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,7 +121,6 @@
 				D30CEEE9189B4D720088CCE4 /* PureChineseCalendarTests */,
 				D30CEEC3189B4D720088CCE4 /* Frameworks */,
 				D30CEEC2189B4D720088CCE4 /* Products */,
-				1E548ACF3D8A4730A7F6084B /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +136,7 @@
 		D30CEEC3189B4D720088CCE4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3E62B07190E11200084C309 /* CoreText.framework */,
 				1E0E5E5718B8218F003B20BE /* CoreMotion.framework */,
 				D3EBBFB318AE60910053799A /* JavaScriptCore.framework */,
 				D30CEEC4189B4D720088CCE4 /* Foundation.framework */,
@@ -220,11 +220,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D30CEEF3189B4D720088CCE4 /* Build configuration list for PBXNativeTarget "PureChineseCalendar" */;
 			buildPhases = (
-				8B07AFA8319D4E058CC79C84 /* Check Pods Manifest.lock */,
 				D30CEEBD189B4D720088CCE4 /* Sources */,
 				D30CEEBE189B4D720088CCE4 /* Frameworks */,
 				D30CEEBF189B4D720088CCE4 /* Resources */,
-				E1F780A2EF4B4E42B7990417 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -314,39 +312,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		8B07AFA8319D4E058CC79C84 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		E1F780A2EF4B4E42B7990417 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D30CEEBD189B4D720088CCE4 /* Sources */ = {
@@ -482,7 +447,6 @@
 		};
 		D30CEEF4189B4D720088CCE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E548ACF3D8A4730A7F6084B /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -497,7 +461,6 @@
 		};
 		D30CEEF5189B4D720088CCE4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E548ACF3D8A4730A7F6084B /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

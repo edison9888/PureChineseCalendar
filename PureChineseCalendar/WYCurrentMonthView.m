@@ -9,8 +9,9 @@
 #import "WYCurrentMonthView.h"
 #import "DeviceCommon.h"
 #import "WYLunarMap.h"
+#import <CoreText/CoreText.h>
 
-#define LEFT            30
+#define LEFT            21
 #define WEEK_TOP        30
 #define WIDTH           40
 #define HEIGHT          40
@@ -59,14 +60,15 @@
     
     NSCalendar *chineseCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSChineseCalendar];
     
-    NSDictionary *fontAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0],NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:13.0]};
-
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [style setAlignment:NSTextAlignmentCenter];
+    NSDictionary *fontAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0],NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:13.0], NSParagraphStyleAttributeName:style};
     // 显示星期
     for (NSUInteger i = 0; i < 7; i++) {
         float x = LEFT + i * WIDTH;
         float y = WEEK_TOP ;
-        CGPoint point = CGPointMake(x, y);
-        [[WYLunarMap instance].weeks[i] drawAtPoint:point withAttributes:fontAttributes];
+        CGRect rect = CGRectMake(x, y, WIDTH, HEIGHT);
+        [[WYLunarMap instance].weeks[i] drawInRect:rect withAttributes:fontAttributes];
     }
     
     
@@ -87,13 +89,15 @@
         float solarY = SOLAR_TOP + step * HEIGHT;
         
         NSString *solarDay = [NSString stringWithFormat:@"%lu", (unsigned long)i];
-        [solarDay drawAtPoint:CGPointMake(x, solarY) withAttributes:fontAttributes];
+        CGRect rect = CGRectMake(x, solarY, WIDTH, HEIGHT);
+        [solarDay drawInRect:rect withAttributes:fontAttributes];
 
         float lunarY = LUNAR_TOP + step * HEIGHT;
+        rect = CGRectMake(x, lunarY, WIDTH, HEIGHT);
         if ([lunarDateComponents day] == 1) {
-            [lunarMonth drawAtPoint:CGPointMake(x, lunarY) withAttributes:fontAttributes];
+            [lunarMonth drawInRect:rect withAttributes:fontAttributes];
         }else{
-            [lunarDay drawAtPoint:CGPointMake(x, lunarY) withAttributes:fontAttributes];
+            [lunarDay drawInRect:rect withAttributes:fontAttributes];
         }
         
         
@@ -103,16 +107,35 @@
     }
     
     CGPoint point = CGPointMake(LEFT + (todayWeekday - 1) * WIDTH, SOLAR_TOP + (today/7) * HEIGHT);
-    CGRect ellipseRect = CGRectMake(point.x - 5, point.y - 5, WIDTH, WIDTH);
+    CGRect ellipseRect = CGRectMake(point.x, point.y - 3, WIDTH, HEIGHT);
 
     // 画圈
     CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);//线条颜色
-//    CGContextSetRGBFillColor (context, 0.8, 0.8, 0.8, 0.5);
-    CGContextAddEllipseInRect(context, ellipseRect);
-//    CGContextFillEllipseInRect(context, ellipseRect);
-    CGContextSetRGBFillColor (context, 0.2, 0.2, 0.2, 0.5);
-//    CGContextAddRect(context, ellipseRect);
+//    CGContextAddEllipseInRect(context, ellipseRect);
+    CGContextSetRGBFillColor (context, 0.8, 0.8, 0.8, 0.4);
+    CGContextFillEllipseInRect(context, ellipseRect);
     CGContextStrokePath(context);
+    
+    
+    
+//    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+//    CGContextTranslateCTM(context, 0, self.bounds.size.height);
+//    CGContextScaleCTM(context, 1.0, -1.0);
+//    
+//    CGMutablePathRef path = CGPathCreateMutable(); //1
+//    CGPathAddRect(path, NULL, self.bounds );
+//    NSAttributedString* attString = [[NSAttributedString alloc]
+//                                      initWithString:@"Hello core text world!"]; //2
+//    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attString); //3
+//    CTFrameRef frame =
+//    CTFramesetterCreateFrame(framesetter, CFRangeMake(0, [attString length]), path, NULL);
+//    CTFrameDraw(frame, context); //4
+//    
+//
+//    
+//    CFRelease(frame); //5
+//    CFRelease(path);
+//    CFRelease(framesetter);
 }
 
 @end
