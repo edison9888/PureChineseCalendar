@@ -12,5 +12,3 @@
 1. [百度](http://zhidao.baidu.com/link?url=RT6G32Emrk3qMHj8HsQVEr0kG9ZFB3qauGrNsuSG6hKSr7cOaAaYHW8kdt7qefQXjRAH4CY51oJtYA_oBxdAmK)
 2. 谷歌
 
-## TODO
-在pan的同时，创建currewnt month view，自己动画显示

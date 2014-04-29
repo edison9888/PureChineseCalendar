@@ -30,6 +30,10 @@
     __weak IBOutlet UILabel *lunarMonthLabel;
     __weak IBOutlet UILabel *solarDayLabel;
     __weak IBOutlet UIView *todayView;
+    
+    __weak IBOutlet UILabel *yearMonthLabel;
+    __weak IBOutlet UIView *yearMonthView;
+
 }
 @end
 
@@ -68,19 +72,97 @@
     lunarMonthLabel.text = [NSString stringWithFormat:@"%@‑%@", lunarMonth, lunarDay];
     solarDayLabel.text = dateString;
 
+
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:date];
+//    NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+    NSUInteger solarYear = [dateComponents year];
+    NSUInteger solarMonth = [dateComponents month];
     
+    
+    // 只前后各加载5个月的，在滑动减速时，再加载一定量的
     // 显示月历表
-    verticalScrollView.contentSize = verticalScrollView.bounds.size;
+    verticalScrollView.contentSize = CGSizeMake(verticalScrollView.bounds.size.width * 12, verticalScrollView.bounds.size.height) ;
     
-    WYCurrentMonthView *monthView = [[WYCurrentMonthView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
-    monthView.backgroundColor = [UIColor clearColor];
-    [verticalScrollView addSubview:monthView];
+    CGFloat time;
+    time = BNRTimeBlock(^{
+        for (int i = 1; i <= 12; i++) {
+            
+            BOOL isCurrentMonth = NO;
+            if (solarMonth == i) {
+                isCurrentMonth = YES;
+            }
+            WYCurrentMonthView *monthView = [[WYCurrentMonthView alloc] initWithYear:solarYear month:i isCurrentMonth:isCurrentMonth];
+            monthView.center = CGPointMake(160 + (i-1)*320, verticalScrollView.bounds.size.height/2);
+            [verticalScrollView addSubview:monthView];
+        }
+    });
+    printf ("加载12个月的时间: %f\n", time);
+    
+
+    verticalScrollView.contentOffset = CGPointMake((solarMonth - 1) * 320, 0);
+    
+    // TODO: 根据scroll view的偏移来计算要显示月历的年、月
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+//    if (yearMonthView.alpha == 0) {
+//        [UIView animateWithDuration:0.3 animations:^{
+//            yearMonthView.alpha = 1;
+//            todayView.alpha = 0;
+//        }];
+//        
+//    }
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSUInteger month = (NSUInteger)scrollView.contentOffset.x / 320 + 1;
+    yearMonthLabel.text = [NSString stringWithFormat:@"%d年%d月", 2014, month];
+    
+}
+
+#import <mach/mach_time.h>  // for mach_absolute_time() and friends
+
+#define LOOPAGE 100000000
+
+CGFloat BNRTimeBlock (void (^block)(void)) {
+    mach_timebase_info_data_t info;
+    if (mach_timebase_info(&info) != KERN_SUCCESS) return -1.0;
+    
+    uint64_t start = mach_absolute_time ();
+    block ();
+    uint64_t end = mach_absolute_time ();
+    uint64_t elapsed = end - start;
+    
+    uint64_t nanos = elapsed * info.numer / info.denom;
+    return (CGFloat)nanos / NSEC_PER_SEC;
+    
+}
+
+#pragma mark - 点击事件
+- (IBAction)tapAction:(id)sender {
+    
+//    if (yearMonthView.alpha == 0) {
+//        [UIView animateWithDuration:0.3 animations:^{
+//            yearMonthView.alpha = 1;
+//            todayView.alpha = 0;
+//        }];
+//        
+//    }else{
+//        [UIView animateWithDuration:0.3 animations:^{
+//            yearMonthView.alpha = 0;
+//            todayView.alpha = 1;
+//        }];
+//        
+//    }
 }
 
 @end
