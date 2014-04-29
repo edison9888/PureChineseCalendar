@@ -12,19 +12,32 @@
 #import <CoreText/CoreText.h>
 
 #define LEFT            21
-#define WEEK_TOP        30
+#define WEEK_TOP        20
 #define WIDTH           40
 #define HEIGHT          40
 
-#define SOLAR_TOP       (WEEK_TOP + 30)
-#define LUNAR_TOP       (WEEK_TOP + 45)
+#define SOLAR_TOP       (WEEK_TOP + 45)
+#define LUNAR_TOP       (WEEK_TOP + 60)
+@interface WYCurrentMonthView ()
+{
+    NSUInteger year;
+    NSUInteger month;
+    BOOL isCurrentMonth;
+}
+
+@end
+
 @implementation WYCurrentMonthView
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (id)initWithYear:(NSUInteger)yearParam month:(NSUInteger)monthParam isCurrentMonth:(BOOL)flag
 {
-    self = [super initWithCoder:aDecoder];
+    self = [super initWithFrame:CGRectMake(0, 0, 320, 315)];
     if (self) {
+        year = yearParam;
+        month = monthParam;
+        isCurrentMonth = flag;
         
+        self.backgroundColor = [UIColor clearColor];
     }
     
     return self;
@@ -35,25 +48,21 @@
  */
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
     CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextSetRGBStrokeColor(context, 0, 1, 0, 1);
-//    CGContextMoveToPoint(context, 40, 80);
-//    CGContextAddLineToPoint(context, 40, 300);
-//    CGContextStrokePath(context);
 
 
     
     // 通过系统的格里高历，再转为中国农历
-    NSDate *date = [NSDate date];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:date];
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setMonth:month];
+    [dateComponents setYear:year];
+    
+    NSDate *date = [calendar dateFromComponents:dateComponents];
+    
+    dateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:date];
     NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
     
-    NSInteger year = [dateComponents year];
-    NSInteger month = [dateComponents month];
-    NSInteger today = [dateComponents day];
-    NSUInteger todayWeekday = [dateComponents weekday];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-d"];
@@ -63,6 +72,7 @@
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [style setAlignment:NSTextAlignmentCenter];
     NSDictionary *fontAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0],NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:13.0], NSParagraphStyleAttributeName:style};
+    
     // 显示星期
     for (NSUInteger i = 0; i < 7; i++) {
         float x = LEFT + i * WIDTH;
@@ -71,9 +81,7 @@
         [[WYLunarMap instance].weeks[i] drawInRect:rect withAttributes:fontAttributes];
     }
     
-    
-//    year = 2012;
-//    month = 8;
+    // 显示月视图
     int step = 0;
     for (NSUInteger i = 1; i <= days.length; i++) {
         
@@ -92,6 +100,33 @@
         CGRect rect = CGRectMake(x, solarY, WIDTH, HEIGHT);
         [solarDay drawInRect:rect withAttributes:fontAttributes];
 
+        
+        if (i == 1) {
+            // 显示年月
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:11.0];
+            UIColor *color = [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0];
+            NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+            [style setAlignment:NSTextAlignmentLeft];
+            NSDictionary *attributes = @{NSForegroundColorAttributeName : color,
+                                         NSFontAttributeName:font,
+                                         NSParagraphStyleAttributeName:style};
+            NSString *yearMonth = [NSString stringWithFormat:@"%d年%d月", year, month];
+            CGPoint point = CGPointMake(LEFT + 7, WEEK_TOP + 24);
+//            CGRect yearMonthRect = CGRectMake(point.x, point.y, 90-point.x, font.lineHeight);
+//            [yearMonth drawInRect:yearMonthRect withAttributes:attributes];
+            [yearMonth drawAtPoint:point withAttributes:attributes];
+            
+            CGSize size = [yearMonth sizeWithAttributes:attributes];
+            
+            
+            CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);
+            CGContextMoveToPoint(context, point.x, point.y + font.lineHeight + 2);
+            CGContextAddLineToPoint(context, size.width + point.x, point.y + font.lineHeight + 2);
+            CGContextStrokePath(context);
+        }
+        
+        
+        
         float lunarY = LUNAR_TOP + step * HEIGHT;
         rect = CGRectMake(x, lunarY, WIDTH, HEIGHT);
         if ([lunarDateComponents day] == 1) {
@@ -106,15 +141,30 @@
         }
     }
     
-    CGPoint point = CGPointMake(LEFT + (todayWeekday - 1) * WIDTH, SOLAR_TOP + (today/7) * HEIGHT);
-    CGRect ellipseRect = CGRectMake(point.x, point.y - 3, WIDTH, HEIGHT);
+    
+    
+    
+    // 显示这个月
+    if (isCurrentMonth) {
 
-    // 画圈
-    CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);//线条颜色
-//    CGContextAddEllipseInRect(context, ellipseRect);
-    CGContextSetRGBFillColor (context, 0.8, 0.8, 0.8, 0.4);
-    CGContextFillEllipseInRect(context, ellipseRect);
-    CGContextStrokePath(context);
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *dateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:[NSDate date]];
+
+        NSInteger today = [dateComponents day];
+        NSUInteger todayWeekday = [dateComponents weekday];
+        
+        
+        CGPoint point = CGPointMake(LEFT + (todayWeekday - 1) * WIDTH, SOLAR_TOP + (today/7) * HEIGHT);
+        CGRect ellipseRect = CGRectMake(point.x, point.y - 3, WIDTH, HEIGHT);
+        
+        // 画圈
+        CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);//线条颜色
+        //    CGContextAddEllipseInRect(context, ellipseRect);
+        CGContextSetRGBFillColor (context, 0.8, 0.8, 0.8, 0.4);
+        CGContextFillEllipseInRect(context, ellipseRect);
+        CGContextStrokePath(context);
+    }
+    
     
     
     
