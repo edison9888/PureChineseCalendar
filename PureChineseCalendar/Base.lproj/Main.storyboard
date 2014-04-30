@@ -47,34 +47,24 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XUW-uK-Jym" userLabel="YearMonth">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="157"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emv-YM-M2g">
+                                <rect key="frame" x="268" y="90" width="51" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKj-eO-X33" userLabel="yearMontLabel">
-                                        <rect key="frame" x="30" y="43" width="260" height="88"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyM-eL-93k">
+                                <state key="normal" title="今天">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="todayAction:" destination="StA-1W-tKQ" eventType="touchUpInside" id="ZjZ-em-ntC"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyM-eL-93k" customClass="DPLinearCalendarScrollView">
                                 <rect key="frame" x="0.0" y="157" width="320" height="323"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="delegate" destination="StA-1W-tKQ" id="0uH-9Y-kRV"/>
-                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="pOO-oK-CKb" appends="YES" id="mks-G5-HsY"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="lunarMonthLabel" destination="Pjt-N8-geT" id="13l-9d-81y"/>
@@ -82,18 +72,11 @@
                         <outlet property="solarDayLabel" destination="Cr6-Hf-FKM" id="iuX-e4-RAA"/>
                         <outlet property="todayView" destination="wDJ-Cf-qnA" id="EwZ-U7-thd"/>
                         <outlet property="verticalScrollView" destination="dyM-eL-93k" id="aa9-KT-o1s"/>
-                        <outlet property="yearMonthLabel" destination="rKj-eO-X33" id="WgV-IE-yOg"/>
-                        <outlet property="yearMonthView" destination="XUW-uK-Jym" id="G5b-Li-acP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2WP-Gu-eg3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="pOO-oK-CKb">
-                    <connections>
-                        <action selector="tapAction:" destination="StA-1W-tKQ" id="IXL-hq-Abm"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="285" y="-31"/>
+            <point key="canvasLocation" x="-246" y="-17"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

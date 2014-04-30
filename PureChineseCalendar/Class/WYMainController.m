@@ -9,31 +9,22 @@
 #import "WYMainController.h"
 #import "WYCurrentMonthView.h"
 #import "WYLunarMap.h"
-
+#import "DPLinearCalendarScrollView.h"
+#import "DPLinearCalendarCell.h"
 
 //#import "UIView+Utils.h"
 //#import "DeviceCommon.h"
 //#import "WYParallaxMotion.h"
 
-
-
-
-
-
-@interface WYMainController ()
+@interface WYMainController () <DPLinearCalendarScrollViewDataSource>
 {
-    __weak IBOutlet UIScrollView *verticalScrollView;
-    __weak IBOutlet UIImageView *backImageView;
-    
+    __weak IBOutlet DPLinearCalendarScrollView *verticalScrollView;
     
     __weak IBOutlet UILabel *lunarYearLabel;
     __weak IBOutlet UILabel *lunarMonthLabel;
     __weak IBOutlet UILabel *solarDayLabel;
     __weak IBOutlet UIView *todayView;
-    
-    __weak IBOutlet UILabel *yearMonthLabel;
-    __weak IBOutlet UIView *yearMonthView;
-
+    CGPoint currentMonthOffset;
 }
 @end
 
@@ -82,27 +73,28 @@
     
     // 只前后各加载5个月的，在滑动减速时，再加载一定量的
     // 显示月历表
-    verticalScrollView.contentSize = CGSizeMake(verticalScrollView.bounds.size.width * 12, verticalScrollView.bounds.size.height) ;
-    
-    CGFloat time;
-    time = BNRTimeBlock(^{
-        for (int i = 1; i <= 12; i++) {
-            
-            BOOL isCurrentMonth = NO;
-            if (solarMonth == i) {
-                isCurrentMonth = YES;
-            }
-            WYCurrentMonthView *monthView = [[WYCurrentMonthView alloc] initWithYear:solarYear month:i isCurrentMonth:isCurrentMonth];
-            monthView.center = CGPointMake(160 + (i-1)*320, verticalScrollView.bounds.size.height/2);
-            [verticalScrollView addSubview:monthView];
-        }
-    });
-    printf ("加载12个月的时间: %f\n", time);
-    
-
-    verticalScrollView.contentOffset = CGPointMake((solarMonth - 1) * 320, 0);
+//    verticalScrollView.contentSize = CGSizeMake(verticalScrollView.bounds.size.width * 12, verticalScrollView.bounds.size.height) ;
+//    
+//    CGFloat time;
+//    time = BNRTimeBlock(^{
+//        for (int i = 1; i <= 12; i++) {
+//            
+//            BOOL isCurrentMonth = NO;
+//            if (solarMonth == i) {
+//                isCurrentMonth = YES;
+//            }
+//            WYCurrentMonthView *monthView = [[WYCurrentMonthView alloc] initWithYear:solarYear month:i isCurrentMonth:isCurrentMonth];
+//            monthView.center = CGPointMake(160 + (i-1)*320, verticalScrollView.bounds.size.height/2);
+//            [verticalScrollView addSubview:monthView];
+//        }
+//    });
+//    printf ("加载12个月的时间: %f\n", time);
+//    
+//    currentMonthOffset = CGPointMake((solarMonth - 1) * 320, 0);
+//    verticalScrollView.contentOffset = currentMonthOffset;
     
     // TODO: 根据scroll view的偏移来计算要显示月历的年、月
+    verticalScrollView.linearDatasource = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,18 +106,19 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-//    if (yearMonthView.alpha == 0) {
-//        [UIView animateWithDuration:0.3 animations:^{
-//            yearMonthView.alpha = 1;
-//            todayView.alpha = 0;
-//        }];
-//        
-//    }
+    
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSUInteger month = (NSUInteger)scrollView.contentOffset.x / 320 + 1;
-    yearMonthLabel.text = [NSString stringWithFormat:@"%d年%d月", 2014, month];
+    // 滑动时，如果offset
+    if ((NSUInteger)scrollView.contentOffset.x % (NSUInteger)currentMonthOffset.x == 0.0) {
+        
+    }
+    
+}
+
+-(DPLinearCalendarCell*) linearScrollViewCellForDate:(NSDate*)date
+{
     
 }
 
@@ -147,22 +140,8 @@ CGFloat BNRTimeBlock (void (^block)(void)) {
     
 }
 
-#pragma mark - 点击事件
-- (IBAction)tapAction:(id)sender {
+- (IBAction)todayAction:(id)sender {
     
-//    if (yearMonthView.alpha == 0) {
-//        [UIView animateWithDuration:0.3 animations:^{
-//            yearMonthView.alpha = 1;
-//            todayView.alpha = 0;
-//        }];
-//        
-//    }else{
-//        [UIView animateWithDuration:0.3 animations:^{
-//            yearMonthView.alpha = 0;
-//            todayView.alpha = 1;
-//        }];
-//        
-//    }
 }
 
 @end
