@@ -7,16 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DPLinearCalendarScrollView.h"
+#import "WYDate.h"
 
 @interface WYCurrentMonthView : UIView
 /**
  *  实例化一个 WYCurrentMonthView。
  *
- *  @param year  月历所在的年。公历年
- *  @param month 要显示的月历。公历月
- *  @param flag  要显示的月历是否是当前时间所在月
+ *  @param date     要显示的年月
+ *  @param flag     要显示的月历是否是当前时间所在月
  *
  *  @return 实例化对象
  */
-- (id)initWithYear:(NSUInteger)year month:(NSUInteger)month isCurrentMonth:(BOOL)flag;
+- (id)initWithDate:(WYDate *)date isCurrentMonth:(BOOL)flag;
+
+
+@property (nonatomic,weak) DPLinearCalendarScrollView *linearCalendar;
+
+@property (nonatomic,strong, readonly) WYDate *cellDate;
+
++(CGFloat)cellWidth;
 @end

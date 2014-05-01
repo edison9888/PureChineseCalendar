@@ -48,10 +48,12 @@
 #import "DPLinearCalendarScrollView.h"
 #import "DPLinearCalendarCell.h"
 #import "NSDate+Helpers.h"
+#import "WYCurrentMonthView.h"
 
 @interface DPLinearCalendarScrollView () <UIScrollViewDelegate>{
     NSMutableArray *visibleCells;
     UIView         *cellContainerView;
+    WYDate *currentDate;
 }
 
 - (void)tileCellsFromMinX:(CGFloat)minimumVisibleX toMaxX:(CGFloat)maximumVisibleX;
@@ -79,6 +81,8 @@
         // hide horizontal scroll indicator so our recentering trick is not revealed
         [self setShowsHorizontalScrollIndicator:NO];
         self.canCancelContentTouches=YES;
+        
+        currentDate = [WYDate currentDate];
     }
     return self;
 }
@@ -154,14 +158,10 @@
 #pragma mark - Cell Tiling
 #pragma mark Cell Create
 
-- (DPLinearCalendarCell*)insertCellForDate:(NSDate*)date{
-    DPLinearCalendarCell *cell;
-    if (linearDatasource && [linearDatasource respondsToSelector:@selector(linearScrollViewCellForDate:)]) {
-        cell = [linearDatasource linearScrollViewCellForDate:date];
-    }
-    if (!cell) {
-        cell=[[DPLinearCalendarCell alloc] initWithFrame:CGRectMake(0, 0, [DPLinearCalendarCell cellWidth], self.frame.size.height)];
-        cell.cellDate=date;
+- (WYCurrentMonthView *)insertCellForDate:(WYDate *)date isCurrentMonth:(BOOL)flag{
+    WYCurrentMonthView *cell;
+    if (linearDatasource && [linearDatasource respondsToSelector:@selector(linearScrollViewCellForDate:isCurrentMonth:)]) {
+        cell = [linearDatasource linearScrollViewCellForDate:date isCurrentMonth:flag];
     }
     
     [cell setLinearCalendar:self];
@@ -171,8 +171,9 @@
 }
 
 
-- (CGFloat)placeNewCellOnRight:(CGFloat)rightEdge ofDate:(NSDate*)date{
-    DPLinearCalendarCell *cell=[self insertCellForDate:date];
+- (CGFloat)placeNewCellOnRight:(CGFloat)rightEdge ofDate:(WYDate *)date{
+    BOOL isCurrentMonth = [date isEqualToDate:currentDate];
+    WYCurrentMonthView *cell=[self insertCellForDate:date isCurrentMonth:isCurrentMonth];
     
     [visibleCells addObject:cell]; // add rightmost label at the end of the array
     
@@ -184,8 +185,9 @@
     return CGRectGetMaxX(frame);
 }
 
-- (CGFloat)placeNewCellOnLeft:(CGFloat)leftEdge ofDate:(NSDate*)date{
-    DPLinearCalendarCell *cell=[self insertCellForDate:date];
+- (CGFloat)placeNewCellOnLeft:(CGFloat)leftEdge ofDate:(WYDate *)date{
+    BOOL isCurrentMonth = [date isEqualToDate:currentDate];
+    WYCurrentMonthView *cell=[self insertCellForDate:date isCurrentMonth:isCurrentMonth];
     
     [visibleCells insertObject:cell atIndex:0]; // add leftmost label at the beginning of the array
     
@@ -201,15 +203,15 @@
     // the upcoming tiling logic depends on there already being at least one label in the visibleLabels array, so
     // to kick off the tiling we need to make sure there's at least one label
     if ([visibleCells count] == 0) {
-        [self placeNewCellOnRight:minimumVisibleX ofDate:[[NSDate date] dateByAddingDays:-1]];
-        self.selectedDate = [NSDate date];
+        [self placeNewCellOnRight:minimumVisibleX ofDate:[currentDate dateByAddingMonths:-1]];
+        self.selectedDate = currentDate;
     }
     
     // add cell that are missing on right side
     DPLinearCalendarCell *lastCell = [visibleCells lastObject];
     CGFloat rightEdge = CGRectGetMaxX([lastCell frame]);
     while (rightEdge < maximumVisibleX) {
-        rightEdge = [self placeNewCellOnRight:rightEdge ofDate:[lastCell.cellDate dateByAddingDays:1]];
+        rightEdge = [self placeNewCellOnRight:rightEdge ofDate:[lastCell.cellDate dateByAddingMonths:1]];
         lastCell = [visibleCells lastObject];
     }
     
@@ -217,7 +219,7 @@
     DPLinearCalendarCell *firstCell = [visibleCells objectAtIndex:0];
     CGFloat leftEdge = CGRectGetMinX([firstCell frame]);
     while (leftEdge > minimumVisibleX) {
-        leftEdge = [self placeNewCellOnLeft:leftEdge ofDate:[firstCell.cellDate dateByAddingDays:-1]];
+        leftEdge = [self placeNewCellOnLeft:leftEdge ofDate:[firstCell.cellDate dateByAddingMonths:-1]];
         firstCell = [visibleCells objectAtIndex:0];
     }
     
@@ -266,7 +268,7 @@
     }
     [self setContentOffset:CGPointMake(cell.frame.origin.x, 0) animated:YES];
     
-    DPLinearCalendarCell *selectedCell = [visibleCells objectAtIndex:currentIndexCell+2];
+    DPLinearCalendarCell *selectedCell = [visibleCells objectAtIndex:currentIndexCell+1];
     _selectedDate = [selectedCell cellDate];
     if (self.linearDelegate && [self.linearDelegate respondsToSelector:@selector(linearCalendarSelectedDate:)]) {
         [self.linearDelegate linearCalendarSelectedDate:_selectedDate];
@@ -276,7 +278,7 @@
 
 #pragma mark - Helpers
 
--(void)setSelectedDate:(NSDate *)selectedDate{
+-(void)setSelectedDate:(WYDate *)selectedDate{
     _selectedDate = selectedDate;
     if (self.wrapEnabled) {
         CGRect visibleBounds = [self convertRect:[self bounds] toView:cellContainerView];
@@ -287,16 +289,16 @@
             [cell removeFromSuperview];
         }
         [visibleCells removeAllObjects];
-        [self placeNewCellOnRight:minimumVisibleX ofDate:[selectedDate dateByAddingDays:-1]];
+        [self placeNewCellOnRight:minimumVisibleX ofDate:[selectedDate dateByAddingMonths:-1]];
         [self tileCellsFromMinX:minimumVisibleX toMaxX:maximumVisibleX];
     }else{
-        for (DPLinearCalendarCell *cell in visibleCells) {
-            if ([[cell.cellDate dateWithoutTime] isEqualToDate:[selectedDate dateWithoutTime]]) {
-                [cell selectCell];
-            }else{
-                [cell unselectCell];
-            }
-        }
+//        for (DPLinearCalendarCell *cell in visibleCells) {
+//            if ([[cell.cellDate dateWithoutTime] isEqualToDate:[selectedDate dateWithoutTime]]) {
+//                [cell selectCell];
+//            }else{
+//                [cell unselectCell];
+//            }
+//        }
         
     }
 
@@ -306,7 +308,7 @@
     }
 }
 
--(NSDate*)selectedDate{
+-(WYDate*)selectedDate{
     return _selectedDate;
 }
 @end

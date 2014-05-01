@@ -20,8 +20,6 @@
 #define LUNAR_TOP       (WEEK_TOP + 60)
 @interface WYCurrentMonthView ()
 {
-    NSUInteger year;
-    NSUInteger month;
     BOOL isCurrentMonth;
 }
 
@@ -29,12 +27,11 @@
 
 @implementation WYCurrentMonthView
 
-- (id)initWithYear:(NSUInteger)yearParam month:(NSUInteger)monthParam isCurrentMonth:(BOOL)flag
+- (id)initWithDate:(WYDate *)date isCurrentMonth:(BOOL)flag
 {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 315)];
     if (self) {
-        year = yearParam;
-        month = monthParam;
+        _cellDate = date;
         isCurrentMonth = flag;
         
         self.backgroundColor = [UIColor clearColor];
@@ -55,8 +52,8 @@
     // 通过系统的格里高历，再转为中国农历
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-    [dateComponents setMonth:month];
-    [dateComponents setYear:year];
+    [dateComponents setMonth:_cellDate.month];
+    [dateComponents setYear:_cellDate.year];
     
     NSDate *date = [calendar dateFromComponents:dateComponents];
     
@@ -85,7 +82,7 @@
     int step = 0;
     for (NSUInteger i = 1; i <= days.length; i++) {
         
-        NSString *solarDateString = [NSString stringWithFormat:@"%ld-%ld-%lu", (long)year, (long)month, (unsigned long)i];
+        NSString *solarDateString = [NSString stringWithFormat:@"%ld-%ld-%lu", (long)_cellDate.year, (long)_cellDate.month, (unsigned long)i];
         NSDate *solarDate = [formatter dateFromString:solarDateString];
         
         NSDateComponents *lunarDateComponents = [chineseCalendar components:NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitMonth fromDate:solarDate];
@@ -110,7 +107,7 @@
             NSDictionary *attributes = @{NSForegroundColorAttributeName : color,
                                          NSFontAttributeName:font,
                                          NSParagraphStyleAttributeName:style};
-            NSString *yearMonth = [NSString stringWithFormat:@"%d年%d月", year, month];
+            NSString *yearMonth = [NSString stringWithFormat:@"%d年%d月", _cellDate.year, _cellDate.month];
             CGPoint point = CGPointMake(LEFT + 7, WEEK_TOP + 24);
 //            CGRect yearMonthRect = CGRectMake(point.x, point.y, 90-point.x, font.lineHeight);
 //            [yearMonth drawInRect:yearMonthRect withAttributes:attributes];
@@ -188,4 +185,8 @@
 //    CFRelease(framesetter);
 }
 
+
++(CGFloat)cellWidth{
+    return 320;
+}
 @end

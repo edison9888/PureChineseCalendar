@@ -48,25 +48,26 @@
 #import <UIKit/UIKit.h>
 
 @class DPLinearCalendarScrollView;
-@class DPLinearCalendarCell;
+@class WYCurrentMonthView;
+@class WYDate;
 
 @protocol DPLinearCalendarScrollViewDelegate <NSObject>
 
--(void)linearCalendarSelectedDate:(NSDate*)date; 
+-(void)linearCalendarSelectedDate:(WYDate*)date;
 
 @end
 
 @protocol DPLinearCalendarScrollViewDataSource <NSObject>
 
-@optional
--(DPLinearCalendarCell*) linearScrollViewCellForDate:(NSDate*)date;
+@required
+-(WYCurrentMonthView*) linearScrollViewCellForDate:(WYDate *)date isCurrentMonth:(BOOL)flag;
 
 @end
 
 
 @interface DPLinearCalendarScrollView : UIScrollView <UIScrollViewDelegate>
 
-@property (nonatomic,strong) NSDate* selectedDate;
+@property (nonatomic,strong) WYDate* selectedDate;
 
 @property (nonatomic,weak) id<DPLinearCalendarScrollViewDataSource> linearDatasource;
 @property (nonatomic,weak) id<DPLinearCalendarScrollViewDelegate> linearDelegate;

@@ -18,7 +18,7 @@
 
 @interface WYMainController () <DPLinearCalendarScrollViewDataSource>
 {
-    __weak IBOutlet DPLinearCalendarScrollView *verticalScrollView;
+    __weak IBOutlet DPLinearCalendarScrollView *hScrollView;
     
     __weak IBOutlet UILabel *lunarYearLabel;
     __weak IBOutlet UILabel *lunarMonthLabel;
@@ -64,11 +64,11 @@
     solarDayLabel.text = dateString;
 
 
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:date];
-//    NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
-    NSUInteger solarYear = [dateComponents year];
-    NSUInteger solarMonth = [dateComponents month];
+//    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:date];
+////    NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+//    NSUInteger solarYear = [dateComponents year];
+//    NSUInteger solarMonth = [dateComponents month];
     
     
     // 只前后各加载5个月的，在滑动减速时，再加载一定量的
@@ -94,7 +94,18 @@
 //    verticalScrollView.contentOffset = currentMonthOffset;
     
     // TODO: 根据scroll view的偏移来计算要显示月历的年、月
-    verticalScrollView.linearDatasource = self;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    hScrollView.linearDatasource = self;
+    hScrollView.wrapEnabled = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,23 +114,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+#pragma mark - scroll view data source
+-(WYCurrentMonthView*) linearScrollViewCellForDate:(WYDate *)date isCurrentMonth:(BOOL)flag;
 {
+    WYCurrentMonthView *monthView = [[WYCurrentMonthView alloc] initWithDate:date isCurrentMonth:flag];
     
-}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    // 滑动时，如果offset
-    if ((NSUInteger)scrollView.contentOffset.x % (NSUInteger)currentMonthOffset.x == 0.0) {
-        
-    }
-    
-}
-
--(DPLinearCalendarCell*) linearScrollViewCellForDate:(NSDate*)date
-{
-    
+    return monthView;
 }
 
 #import <mach/mach_time.h>  // for mach_absolute_time() and friends
