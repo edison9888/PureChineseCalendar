@@ -203,7 +203,8 @@
     // the upcoming tiling logic depends on there already being at least one label in the visibleLabels array, so
     // to kick off the tiling we need to make sure there's at least one label
     if ([visibleCells count] == 0) {
-        [self placeNewCellOnRight:minimumVisibleX ofDate:[currentDate dateByAddingMonths:-1]];
+//        [self placeNewCellOnRight:minimumVisibleX ofDate:[currentDate dateByAddingMonths:-1]];
+        [self placeNewCellOnRight:minimumVisibleX ofDate:currentDate];
         self.selectedDate = currentDate;
     }
     

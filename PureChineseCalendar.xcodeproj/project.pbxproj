@@ -21,7 +21,6 @@
 		D30CEEE6189B4D720088CCE4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30CEEC8189B4D720088CCE4 /* UIKit.framework */; };
 		D30CEEEE189B4D720088CCE4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D30CEEEC189B4D720088CCE4 /* InfoPlist.strings */; };
 		D31A0FE0190A42390000964B /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = D31A0FDF190A42390000964B /* iTunesArtwork */; };
-		D353B31218C307610018BF62 /* WYParallaxMotion.m in Sources */ = {isa = PBXBuildFile; fileRef = D353B31118C307610018BF62 /* WYParallaxMotion.m */; };
 		D37B963218B0A9C200623499 /* WYMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37B963118B0A9C200623499 /* WYMainController.m */; };
 		D38857E91909D3BC002EC616 /* WYLunarMap.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857E81909D3BC002EC616 /* WYLunarMap.m */; };
 		D38857F1190FF16D002EC616 /* DPLinearCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857EC190FF16D002EC616 /* DPLinearCalendarCell.m */; };
@@ -29,7 +28,6 @@
 		D38857F3190FF16D002EC616 /* NSDate+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857F0190FF16D002EC616 /* NSDate+Helpers.m */; };
 		D38857F61912116C002EC616 /* WYDate.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857F51912116C002EC616 /* WYDate.m */; };
 		D38857F819122CB3002EC616 /* WYDateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857F719122CB3002EC616 /* WYDateTest.m */; };
-		D3B7E3311900A3F1006AB9D8 /* UIView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B7E3301900A3F1006AB9D8 /* UIView+Utils.m */; };
 		D3C08D8B190B5A3500377905 /* WYCurrentMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C08D8A190B5A3500377905 /* WYCurrentMonthView.m */; };
 		D3C08D8D190B5B0800377905 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8C190B5B0800377905 /* README.md */; };
 		D3C08D90190BEEAF00377905 /* backImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8E190BEEAF00377905 /* backImage@2x.png */; };
@@ -49,7 +47,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		030279D716F043DEB0F60942 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E0E5E5718B8218F003B20BE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		D30CEEC1189B4D720088CCE4 /* PureChineseCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PureChineseCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30CEEC4189B4D720088CCE4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -69,11 +66,8 @@
 		D30CEEED189B4D720088CCE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D31A0FDF190A42390000964B /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		D31A0FE1190A42420000964B /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
-		D353B31018C307610018BF62 /* WYParallaxMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYParallaxMotion.h; path = ../Class/WYParallaxMotion.h; sourceTree = "<group>"; };
-		D353B31118C307610018BF62 /* WYParallaxMotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYParallaxMotion.m; path = ../Class/WYParallaxMotion.m; sourceTree = "<group>"; };
 		D37B963018B0A9C200623499 /* WYMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYMainController.h; path = Class/WYMainController.h; sourceTree = "<group>"; };
 		D37B963118B0A9C200623499 /* WYMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYMainController.m; path = Class/WYMainController.m; sourceTree = "<group>"; };
-		D37B964218B0B36E00623499 /* DeviceCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommon.h; sourceTree = "<group>"; };
 		D38857E71909D3BC002EC616 /* WYLunarMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLunarMap.h; sourceTree = "<group>"; };
 		D38857E81909D3BC002EC616 /* WYLunarMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLunarMap.m; sourceTree = "<group>"; };
 		D38857EB190FF16D002EC616 /* DPLinearCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPLinearCalendarCell.h; sourceTree = "<group>"; };
@@ -85,8 +79,6 @@
 		D38857F41912116C002EC616 /* WYDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYDate.h; sourceTree = "<group>"; };
 		D38857F51912116C002EC616 /* WYDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDate.m; sourceTree = "<group>"; };
 		D38857F719122CB3002EC616 /* WYDateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDateTest.m; sourceTree = "<group>"; };
-		D3B7E32F1900A3F1006AB9D8 /* UIView+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utils.h"; sourceTree = "<group>"; };
-		D3B7E3301900A3F1006AB9D8 /* UIView+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utils.m"; sourceTree = "<group>"; };
 		D3C08D89190B5A3500377905 /* WYCurrentMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYCurrentMonthView.h; sourceTree = "<group>"; };
 		D3C08D8A190B5A3500377905 /* WYCurrentMonthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYCurrentMonthView.m; sourceTree = "<group>"; };
 		D3C08D8C190B5B0800377905 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -153,7 +145,6 @@
 				D30CEEC6189B4D720088CCE4 /* CoreGraphics.framework */,
 				D30CEEC8189B4D720088CCE4 /* UIKit.framework */,
 				D30CEEE3189B4D720088CCE4 /* XCTest.framework */,
-				030279D716F043DEB0F60942 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -171,7 +162,6 @@
 				D3C08D89190B5A3500377905 /* WYCurrentMonthView.h */,
 				D3C08D8A190B5A3500377905 /* WYCurrentMonthView.m */,
 				D38857EA190FF16D002EC616 /* DPLinearCalendar */,
-				D37B964118B0B36E00623499 /* Global */,
 				D30CEECB189B4D720088CCE4 /* Supporting Files */,
 			);
 			path = PureChineseCalendar;
@@ -209,18 +199,6 @@
 				D30CEEEC189B4D720088CCE4 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D37B964118B0B36E00623499 /* Global */ = {
-			isa = PBXGroup;
-			children = (
-				D3B7E32F1900A3F1006AB9D8 /* UIView+Utils.h */,
-				D3B7E3301900A3F1006AB9D8 /* UIView+Utils.m */,
-				D37B964218B0B36E00623499 /* DeviceCommon.h */,
-				D353B31018C307610018BF62 /* WYParallaxMotion.h */,
-				D353B31118C307610018BF62 /* WYParallaxMotion.m */,
-			);
-			path = Global;
 			sourceTree = "<group>";
 		};
 		D38857EA190FF16D002EC616 /* DPLinearCalendar */ = {
@@ -351,9 +329,7 @@
 				D3C08D8B190B5A3500377905 /* WYCurrentMonthView.m in Sources */,
 				D38857F61912116C002EC616 /* WYDate.m in Sources */,
 				D37B963218B0A9C200623499 /* WYMainController.m in Sources */,
-				D353B31218C307610018BF62 /* WYParallaxMotion.m in Sources */,
 				D38857E91909D3BC002EC616 /* WYLunarMap.m in Sources */,
-				D3B7E3311900A3F1006AB9D8 /* UIView+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

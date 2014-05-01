@@ -12,10 +12,6 @@
 #import "DPLinearCalendarScrollView.h"
 #import "DPLinearCalendarCell.h"
 
-//#import "UIView+Utils.h"
-//#import "DeviceCommon.h"
-//#import "WYParallaxMotion.h"
-
 @interface WYMainController () <DPLinearCalendarScrollViewDataSource>
 {
     __weak IBOutlet DPLinearCalendarScrollView *hScrollView;

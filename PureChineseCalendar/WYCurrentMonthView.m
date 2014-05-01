@@ -7,7 +7,6 @@
 //
 
 #import "WYCurrentMonthView.h"
-#import "DeviceCommon.h"
 #import "WYLunarMap.h"
 #import <CoreText/CoreText.h>
 
@@ -66,9 +65,13 @@
     
     NSCalendar *chineseCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSChineseCalendar];
     
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:13.0];
+    UIColor *color = [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0];
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [style setAlignment:NSTextAlignmentCenter];
-    NSDictionary *fontAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0],NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:13.0], NSParagraphStyleAttributeName:style};
+    NSDictionary *fontAttributes = @{NSForegroundColorAttributeName : color,
+                                 NSFontAttributeName:font,
+                                 NSParagraphStyleAttributeName:style};
     
     // 显示星期
     for (NSUInteger i = 0; i < 7; i++) {
@@ -101,7 +104,6 @@
         if (i == 1) {
             // 显示年月
             UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:11.0];
-            UIColor *color = [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0];
             NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
             [style setAlignment:NSTextAlignmentLeft];
             NSDictionary *attributes = @{NSForegroundColorAttributeName : color,
@@ -127,7 +129,11 @@
         float lunarY = LUNAR_TOP + step * HEIGHT;
         rect = CGRectMake(x, lunarY, WIDTH, HEIGHT);
         if ([lunarDateComponents day] == 1) {
-            [lunarMonth drawInRect:rect withAttributes:fontAttributes];
+            UIColor *color = [UIColor colorWithRed:255.0/255 green:0/255 blue:0/255 alpha:1.0];
+            NSDictionary *attributes = @{NSForegroundColorAttributeName : color,
+                                         NSFontAttributeName:font,
+                                         NSParagraphStyleAttributeName:style};
+            [lunarMonth drawInRect:rect withAttributes:attributes];
         }else{
             [lunarDay drawInRect:rect withAttributes:fontAttributes];
         }
