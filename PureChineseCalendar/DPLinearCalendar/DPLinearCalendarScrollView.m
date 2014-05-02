@@ -47,7 +47,6 @@
 
 #import "DPLinearCalendarScrollView.h"
 #import "DPLinearCalendarCell.h"
-#import "NSDate+Helpers.h"
 #import "WYCurrentMonthView.h"
 
 @interface DPLinearCalendarScrollView () <UIScrollViewDelegate>{
@@ -67,7 +66,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder])) {
-        self.contentSize = CGSizeMake(5000, self.frame.size.height);
+        self.contentSize = CGSizeMake(2000, self.frame.size.height);
         self.delegate = self;
         [self setupDefaultValues];
         visibleCells = [[NSMutableArray alloc] init];
@@ -242,12 +241,16 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"offset %@", NSStringFromCGPoint(scrollView.contentOffset));
+}
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if (!decelerate) {
         [self centerDateIfWrapEnabled];
     }
 
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

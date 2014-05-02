@@ -44,6 +44,13 @@
                                         <color key="textColor" white="0.14236427919708028" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgX-QQ-cEr">
+                                        <rect key="frame" x="20" y="17" width="195" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -71,6 +78,7 @@
                         <outlet property="lunarMonthLabel" destination="Pjt-N8-geT" id="13l-9d-81y"/>
                         <outlet property="lunarYearLabel" destination="Iju-fO-rHo" id="xtN-Cq-YYq"/>
                         <outlet property="solarDayLabel" destination="Cr6-Hf-FKM" id="iuX-e4-RAA"/>
+                        <outlet property="testLabel" destination="xgX-QQ-cEr" id="ziU-ce-GTM"/>
                         <outlet property="todayView" destination="wDJ-Cf-qnA" id="EwZ-U7-thd"/>
                     </connections>
                 </viewController>
