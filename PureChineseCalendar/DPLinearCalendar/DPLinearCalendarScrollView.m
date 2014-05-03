@@ -66,7 +66,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder])) {
-        self.contentSize = CGSizeMake(2000, self.frame.size.height);
+        self.contentSize = CGSizeMake(960, self.frame.size.height);
         self.delegate = self;
         [self setupDefaultValues];
         visibleCells = [[NSMutableArray alloc] init];
@@ -241,10 +241,10 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    NSLog(@"offset %@", NSStringFromCGPoint(scrollView.contentOffset));
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    NSLog(@"offset %@", NSStringFromCGPoint(scrollView.contentOffset));
+//}
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if (!decelerate) {
         [self centerDateIfWrapEnabled];

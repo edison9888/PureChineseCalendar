@@ -144,9 +144,6 @@
         }
     }
     
-    
-    
-    
     // 显示这个月
     if (isCurrentMonth) {
 
@@ -167,9 +164,6 @@
         CGContextFillEllipseInRect(context, ellipseRect);
         CGContextStrokePath(context);
     }
-    
-    
-    
     
 //    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
 //    CGContextTranslateCTM(context, 0, self.bounds.size.height);
