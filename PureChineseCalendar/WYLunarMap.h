@@ -23,6 +23,10 @@
 
 @property (nonatomic, strong) NSCalendar *gregorianCalendar;
 @property (nonatomic, strong) NSCalendar *chineseCalendar;
+@property (nonatomic, strong) NSDateFormatter *formatter;
 
+@property (nonatomic, strong) NSDictionary *weekDayFontAttributes;
+@property (nonatomic, strong) NSDictionary *yearMonthFontAttributes;
+@property (nonatomic, strong) NSDictionary *lunarMonthFontAttributes;
 + (instancetype) instance;
 @end

@@ -9,6 +9,8 @@
 #import "WYCurrentMonthView.h"
 #import "WYLunarMap.h"
 #import <CoreText/CoreText.h>
+#import <mach/mach_time.h>
+
 
 #define LEFT            21
 #define WEEK_TOP        20
@@ -39,12 +41,12 @@
     return self;
 }
 
-- (void)layoutSubviews
-{
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 100)];
-    label.text = @"a";
-    [self addSubview:label];
-}
+//- (void)layoutSubviews
+//{
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 100)];
+//    label.text = @"a";
+//    [self addSubview:label];
+//}
 
 /*
  绘画参考：http://blog.csdn.net/zhibudefeng/article/details/8463268
@@ -53,40 +55,26 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    
+    uint64_t start = mach_absolute_time ();
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     // 通过系统的格里高历，再转为中国农历
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     [dateComponents setMonth:_cellDate.month];
     [dateComponents setYear:_cellDate.year];
     
-    NSDate *date = [calendar dateFromComponents:dateComponents];
+    NSDate *date = [[WYLunarMap instance].gregorianCalendar dateFromComponents:dateComponents];
     
-    dateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:date];
-    NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+    dateComponents = [[WYLunarMap instance].gregorianCalendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:date];
+    NSRange days = [[WYLunarMap instance].gregorianCalendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
     
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-d"];
-    
-    NSCalendar *chineseCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSChineseCalendar];
-    
-    UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:13.0];
-    UIColor *color = [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0];
-    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    [style setAlignment:NSTextAlignmentCenter];
-    NSDictionary *fontAttributes = @{NSForegroundColorAttributeName : color,
-                                 NSFontAttributeName:font,
-                                 NSParagraphStyleAttributeName:style};
-    
+
     // 显示星期
     for (NSUInteger i = 0; i < 7; i++) {
         float x = LEFT + i * WIDTH;
         float y = WEEK_TOP ;
         CGRect rect = CGRectMake(x, y, WIDTH, HEIGHT);
-        [[WYLunarMap instance].weeks[i] drawInRect:rect withAttributes:fontAttributes];
+        [[WYLunarMap instance].weeks[i] drawInRect:rect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
     }
     
     // 显示月视图
@@ -94,9 +82,9 @@
     for (NSUInteger i = 1; i <= days.length; i++) {
         
         NSString *solarDateString = [NSString stringWithFormat:@"%ld-%ld-%lu", (long)_cellDate.year, (long)_cellDate.month, (unsigned long)i];
-        NSDate *solarDate = [formatter dateFromString:solarDateString];
+        NSDate *solarDate = [[WYLunarMap instance].formatter dateFromString:solarDateString];
         
-        NSDateComponents *lunarDateComponents = [chineseCalendar components:NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitMonth fromDate:solarDate];
+        NSDateComponents *lunarDateComponents = [[WYLunarMap instance].chineseCalendar components:NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitMonth fromDate:solarDate];
         NSUInteger weekday = [lunarDateComponents weekday];
         NSString *lunarDay = [WYLunarMap instance].arrayDay[[lunarDateComponents day] - 1];
         NSString *lunarMonth = [WYLunarMap instance].arrayMonth[[lunarDateComponents month] - 1];
@@ -106,27 +94,20 @@
         
         NSString *solarDay = [NSString stringWithFormat:@"%lu", (unsigned long)i];
         CGRect rect = CGRectMake(x, solarY, WIDTH, HEIGHT);
-        [solarDay drawInRect:rect withAttributes:fontAttributes];
+        [solarDay drawInRect:rect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
 
         
         if (i == 1) {
             // 显示年月
-            UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:11.0];
-            NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-            [style setAlignment:NSTextAlignmentLeft];
-            NSDictionary *attributes = @{NSForegroundColorAttributeName : color,
-                                         NSFontAttributeName:font,
-                                         NSParagraphStyleAttributeName:style};
+            
             NSString *yearMonth = [NSString stringWithFormat:@"%d年%d月", _cellDate.year, _cellDate.month];
             CGPoint point = CGPointMake(LEFT + 7, WEEK_TOP + 24);
-//            CGRect yearMonthRect = CGRectMake(point.x, point.y, 90-point.x, font.lineHeight);
-//            [yearMonth drawInRect:yearMonthRect withAttributes:attributes];
-            [yearMonth drawAtPoint:point withAttributes:attributes];
-            
-            CGSize size = [yearMonth sizeWithAttributes:attributes];
+            [yearMonth drawAtPoint:point withAttributes:[WYLunarMap instance].yearMonthFontAttributes];
+            CGSize size = [yearMonth sizeWithAttributes:[WYLunarMap instance].yearMonthFontAttributes];
             
             
             CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);
+            UIFont *font = [WYLunarMap instance].yearMonthFontAttributes[NSFontAttributeName];
             CGContextMoveToPoint(context, point.x, point.y + font.lineHeight + 2);
             CGContextAddLineToPoint(context, size.width + point.x, point.y + font.lineHeight + 2);
             CGContextStrokePath(context);
@@ -137,13 +118,10 @@
         float lunarY = LUNAR_TOP + step * HEIGHT;
         rect = CGRectMake(x, lunarY, WIDTH, HEIGHT);
         if ([lunarDateComponents day] == 1) {
-            UIColor *color = [UIColor colorWithRed:255.0/255 green:0/255 blue:0/255 alpha:1.0];
-            NSDictionary *attributes = @{NSForegroundColorAttributeName : color,
-                                         NSFontAttributeName:font,
-                                         NSParagraphStyleAttributeName:style};
-            [lunarMonth drawInRect:rect withAttributes:attributes];
+            
+            [lunarMonth drawInRect:rect withAttributes:[WYLunarMap instance].lunarMonthFontAttributes];
         }else{
-            [lunarDay drawInRect:rect withAttributes:fontAttributes];
+            [lunarDay drawInRect:rect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
         }
         
         
@@ -156,13 +134,11 @@
     if (isCurrentMonth) {
 
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *dateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday fromDate:[NSDate date]];
-
-        NSInteger today = [dateComponents day];
+        NSDateComponents *dateComponents = [calendar components:NSCalendarUnitWeekday | NSCalendarUnitWeekOfMonth fromDate:[NSDate date]];
         NSUInteger todayWeekday = [dateComponents weekday];
         
         
-        CGPoint point = CGPointMake(LEFT + (todayWeekday - 1) * WIDTH, SOLAR_TOP + (today/7) * HEIGHT);
+        CGPoint point = CGPointMake(LEFT + (todayWeekday - 1) * WIDTH, SOLAR_TOP + ([dateComponents weekOfMonth] - 1) * HEIGHT);
         CGRect ellipseRect = CGRectMake(point.x, point.y - 3, WIDTH, HEIGHT);
         
         // 画圈
@@ -173,6 +149,17 @@
         CGContextStrokePath(context);
     }
     
+    
+    
+    
+    
+    
+    uint64_t end = mach_absolute_time ();
+    uint64_t elapsed = end - start;
+    mach_timebase_info_data_t info;
+    mach_timebase_info(&info);
+    uint64_t nanos = elapsed * info.numer / info.denom;
+    NSLog(@"加载时间 %f", (CGFloat)nanos / NSEC_PER_SEC);
 
 }
  

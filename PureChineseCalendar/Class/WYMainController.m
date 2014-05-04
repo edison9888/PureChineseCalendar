@@ -10,7 +10,7 @@
 #import "WYCurrentMonthView.h"
 #import "WYLunarMap.h"
 #import "InfiniteScrollView.h"
-#import <mach/mach_time.h>  // for mach_absolute_time() and friends
+#import <mach/mach_time.h>
 
 @interface WYMainController () //<DPLinearCalendarScrollViewDataSource>
 {
@@ -27,13 +27,20 @@
 @end
 
 @implementation WYMainController
-
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        start = mach_absolute_time ();
+    }
+    
+    
+    return self;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    start = mach_absolute_time ();
-    
     // 背景
 //    UIImage *img = [UIImage imageNamed:@"backImage"];
 //    backImageView.image = img;
@@ -82,23 +89,5 @@
 - (IBAction)todayAction:(id)sender {
     // TODO: 要先研究DPLinearCalendarScrollView的源代码，然后再回来做todayAction功能。不研究明白，这个地方做不出来
 }
-
-
-
-
-CGFloat BNRTimeBlock (void (^block)(void)) {
-    mach_timebase_info_data_t info;
-    if (mach_timebase_info(&info) != KERN_SUCCESS) return -1.0;
-    
-    uint64_t start = mach_absolute_time ();
-    block ();
-    uint64_t end = mach_absolute_time ();
-    uint64_t elapsed = end - start;
-    
-    uint64_t nanos = elapsed * info.numer / info.denom;
-    return (CGFloat)nanos / NSEC_PER_SEC;
-}
-
-
 
 @end

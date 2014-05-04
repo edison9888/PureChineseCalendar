@@ -38,6 +38,34 @@
     _arrayYear = @[@"甲子", @"乙丑", @"丙寅", @"丁卯", @"戊辰", @"己巳", @"庚午", @"辛未", @"壬申", @"癸酉", @"甲戌", @"乙亥", @"丙子", @"丁丑", @"戊寅", @"己卯", @"庚辰", @"辛巳", @"壬午", @"癸未", @"甲申", @"乙酉", @"丙戌", @"丁亥", @"戊子", @"己丑", @"庚寅", @"辛卯", @"壬辰", @"癸巳", @"甲午", @"乙未", @"丙申", @"丁酉", @"戊戌", @"己亥", @"庚子", @"辛丑", @"任寅", @"癸卯", @"甲辰", @"乙巳", @"丙午", @"丁未", @"戊申", @"己酉", @"庚戌", @"辛亥", @"壬子", @"癸丑", @"甲寅", @"乙卯", @"丙辰", @"丁己", @"戊午", @"己未", @"庚申", @"辛酉", @"壬戌", @"癸亥"];
     
     
+    _gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    _chineseCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSChineseCalendar];
+    _formatter = [[NSDateFormatter alloc] init];
+    [_formatter setDateFormat:@"yyyy-MM-d"];
+    
+
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:13.0];
+    UIColor *color = [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0];
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [style setAlignment:NSTextAlignmentCenter];
+    _weekDayFontAttributes = @{NSForegroundColorAttributeName : color,
+                                     NSFontAttributeName:font,
+                                     NSParagraphStyleAttributeName:style};
+    
+    
+    font = [UIFont fontWithName:@"HelveticaNeue" size:11.0];
+    style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [style setAlignment:NSTextAlignmentLeft];
+    _yearMonthFontAttributes = @{NSForegroundColorAttributeName : color,
+                                 NSFontAttributeName:font,
+                                 NSParagraphStyleAttributeName:style};
+    
+    color = [UIColor colorWithRed:255.0/255 green:0/255 blue:0/255 alpha:1.0];
+    _lunarMonthFontAttributes = @{NSForegroundColorAttributeName : color,
+                                 NSFontAttributeName:font,
+                                 NSParagraphStyleAttributeName:style};
+    
+    
     return self;
 }
 @end
