@@ -38,16 +38,24 @@
     
     return self;
 }
+
+- (void)layoutSubviews
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 100)];
+    label.text = @"a";
+    [self addSubview:label];
+}
+
 /*
  绘画参考：http://blog.csdn.net/zhibudefeng/article/details/8463268
  
  */
+
 - (void)drawRect:(CGRect)rect
 {
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-
-    
     // 通过系统的格里高历，再转为中国农历
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
@@ -165,28 +173,9 @@
         CGContextStrokePath(context);
     }
     
-//    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-//    CGContextTranslateCTM(context, 0, self.bounds.size.height);
-//    CGContextScaleCTM(context, 1.0, -1.0);
-//    
-//    CGMutablePathRef path = CGPathCreateMutable(); //1
-//    CGPathAddRect(path, NULL, self.bounds );
-//    NSAttributedString* attString = [[NSAttributedString alloc]
-//                                      initWithString:@"Hello core text world!"]; //2
-//    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attString); //3
-//    CTFrameRef frame =
-//    CTFramesetterCreateFrame(framesetter, CFRangeMake(0, [attString length]), path, NULL);
-//    CTFrameDraw(frame, context); //4
-//    
-//
-//    
-//    CFRelease(frame); //5
-//    CFRelease(path);
-//    CFRelease(framesetter);
-}
 
-
-+(CGFloat)cellWidth{
-    return 320;
 }
+ 
+ 
+
 @end

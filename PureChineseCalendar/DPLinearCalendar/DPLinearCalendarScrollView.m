@@ -55,20 +55,16 @@
     WYDate *currentDate;
 }
 
-- (void)tileCellsFromMinX:(CGFloat)minimumVisibleX toMaxX:(CGFloat)maximumVisibleX;
-
 @end
 
 
 @implementation DPLinearCalendarScrollView
-@synthesize linearDatasource;
-@synthesize selectedDate = _selectedDate;
+
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder])) {
         self.contentSize = CGSizeMake(960, self.frame.size.height);
         self.delegate = self;
-        [self setupDefaultValues];
         visibleCells = [[NSMutableArray alloc] init];
         
         cellContainerView = [[UIView alloc] init];
@@ -86,10 +82,6 @@
     return self;
 }
 
--(void)setupDefaultValues{
-    self.wrapEnabled = YES;
-}
-
 #pragma mark -
 #pragma mark Layout
 
@@ -103,39 +95,11 @@
     if (distanceFromCenter > (contentWidth / 4.0)) {
         self.contentOffset = CGPointMake(centerOffsetX, currentOffset.y);
         
-        if (currentOffset.x - centerOffsetX>0) {
-            
-            DPLinearCalendarCell *first ;
-            if ([visibleCells count]>0) {
-                first = [visibleCells objectAtIndex:0];
-            }
-            
-            for (DPLinearCalendarCell *c in visibleCells) {
-                [c removeFromSuperview];
-            }
-            
-            [visibleCells removeAllObjects];
-            if (first) {
-                
-                first.center = CGPointMake(centerOffsetX, 0);
-                [visibleCells addObject:first];
-            }
-        }else{
-            DPLinearCalendarCell *last ;
-            if ([visibleCells count]>0) {
-                last = [visibleCells lastObject];
-            }
-
-            for (DPLinearCalendarCell *c in visibleCells) {
-                [c removeFromSuperview];
-            }
-            
-            [visibleCells removeAllObjects];
-            if (last) {
-                
-                last.center = CGPointMake(centerOffsetX+320, last.center.y);
-                [visibleCells addObject:last];
-            }
+        // move content by the same amount so it appears to stay still
+        for (WYCurrentMonthView *view in visibleCells) {
+            CGPoint center = [cellContainerView convertPoint:view.center toView:self];
+            center.x += (centerOffsetX - currentOffset.x);
+            view.center = [self convertPoint:center toView:cellContainerView];
         }
     }
 }
@@ -158,13 +122,9 @@
 #pragma mark Cell Create
 
 - (WYCurrentMonthView *)insertCellForDate:(WYDate *)date isCurrentMonth:(BOOL)flag{
-    WYCurrentMonthView *cell;
-    if (linearDatasource && [linearDatasource respondsToSelector:@selector(linearScrollViewCellForDate:isCurrentMonth:)]) {
-        cell = [linearDatasource linearScrollViewCellForDate:date isCurrentMonth:flag];
-    }
     
-    [cell setLinearCalendar:self];
-    
+    WYCurrentMonthView *cell = [[WYCurrentMonthView alloc] initWithDate:date isCurrentMonth:flag];
+        
     [cellContainerView addSubview:cell];
     return cell;
 }
@@ -178,7 +138,6 @@
     
     CGRect frame = [cell frame];
     frame.origin.x = rightEdge;
-//    frame.origin.y = [cellContainerView bounds].size.height - frame.size.height;
     [cell setFrame:frame];
         
     return CGRectGetMaxX(frame);
@@ -192,7 +151,6 @@
     
     CGRect frame = [cell frame];
     frame.origin.x = leftEdge - frame.size.width;
-//    frame.origin.y = [cellContainerView bounds].size.height - frame.size.height;
     [cell setFrame:frame];
     
     return CGRectGetMinX(frame);
@@ -202,9 +160,7 @@
     // the upcoming tiling logic depends on there already being at least one label in the visibleLabels array, so
     // to kick off the tiling we need to make sure there's at least one label
     if ([visibleCells count] == 0) {
-//        [self placeNewCellOnRight:minimumVisibleX ofDate:[currentDate dateByAddingMonths:-1]];
         [self placeNewCellOnRight:minimumVisibleX ofDate:currentDate];
-        self.selectedDate = currentDate;
     }
     
     // add cell that are missing on right side
@@ -212,7 +168,6 @@
     CGFloat rightEdge = CGRectGetMaxX([lastCell frame]);
     while (rightEdge < maximumVisibleX) {
         rightEdge = [self placeNewCellOnRight:rightEdge ofDate:[lastCell.cellDate dateByAddingMonths:1]];
-        lastCell = [visibleCells lastObject];
     }
     
     // add labels that are missing on left side
@@ -220,7 +175,6 @@
     CGFloat leftEdge = CGRectGetMinX([firstCell frame]);
     while (leftEdge > minimumVisibleX) {
         leftEdge = [self placeNewCellOnLeft:leftEdge ofDate:[firstCell.cellDate dateByAddingMonths:-1]];
-        firstCell = [visibleCells objectAtIndex:0];
     }
     
     // remove labels that have fallen off right edge
@@ -238,81 +192,5 @@
         [visibleCells removeObjectAtIndex:0];
         firstCell = [visibleCells objectAtIndex:0];
     }
-}
-
-#pragma mark - UIScrollViewDelegate
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    NSLog(@"offset %@", NSStringFromCGPoint(scrollView.contentOffset));
-//}
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if (!decelerate) {
-        [self centerDateIfWrapEnabled];
-    }
-
-    
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self centerDateIfWrapEnabled];
-}
-
--(void)centerDateIfWrapEnabled{
-    if (!self.wrapEnabled) {
-        return;
-    }
-    CGRect visibleBounds = [self convertRect:[self bounds] toView:cellContainerView];
-    CGFloat minimumVisibleX = CGRectGetMinX(visibleBounds);
-
-    NSInteger currentIndexCell = 0;
-    DPLinearCalendarCell *cell = [visibleCells objectAtIndex:0];
-    if (cell.frame.origin.x + cell.frame.size.width/2 < minimumVisibleX) {
-        cell = [visibleCells objectAtIndex:1];
-        currentIndexCell = 1;
-    }
-    [self setContentOffset:CGPointMake(cell.frame.origin.x, 0) animated:YES];
-    
-    DPLinearCalendarCell *selectedCell = [visibleCells objectAtIndex:currentIndexCell+1];
-    _selectedDate = [selectedCell cellDate];
-    if (self.linearDelegate && [self.linearDelegate respondsToSelector:@selector(linearCalendarSelectedDate:)]) {
-        [self.linearDelegate linearCalendarSelectedDate:_selectedDate];
-    }
-
-}
-
-#pragma mark - Helpers
-
--(void)setSelectedDate:(WYDate *)selectedDate{
-    _selectedDate = selectedDate;
-    if (self.wrapEnabled) {
-        CGRect visibleBounds = [self convertRect:[self bounds] toView:cellContainerView];
-        CGFloat minimumVisibleX = CGRectGetMinX(visibleBounds);
-        CGFloat maximumVisibleX = CGRectGetMaxX(visibleBounds);
-        
-        for (DPLinearCalendarCell *cell in visibleCells) {
-            [cell removeFromSuperview];
-        }
-        [visibleCells removeAllObjects];
-        [self placeNewCellOnRight:minimumVisibleX ofDate:[selectedDate dateByAddingMonths:-1]];
-        [self tileCellsFromMinX:minimumVisibleX toMaxX:maximumVisibleX];
-    }else{
-//        for (DPLinearCalendarCell *cell in visibleCells) {
-//            if ([[cell.cellDate dateWithoutTime] isEqualToDate:[selectedDate dateWithoutTime]]) {
-//                [cell selectCell];
-//            }else{
-//                [cell unselectCell];
-//            }
-//        }
-        
-    }
-
-    
-    if (self.linearDelegate && [self.linearDelegate respondsToSelector:@selector(linearCalendarSelectedDate:)]) {
-        [self.linearDelegate linearCalendarSelectedDate:selectedDate];
-    }
-}
-
--(WYDate*)selectedDate{
-    return _selectedDate;
 }
 @end

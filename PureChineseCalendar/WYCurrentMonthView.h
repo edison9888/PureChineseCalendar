@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DPLinearCalendarScrollView.h"
 #import "WYDate.h"
 
 @interface WYCurrentMonthView : UIView
@@ -22,9 +21,7 @@
 - (id)initWithDate:(WYDate *)date isCurrentMonth:(BOOL)flag;
 
 
-@property (nonatomic,weak) DPLinearCalendarScrollView *linearCalendar;
 
 @property (nonatomic,strong, readonly) WYDate *cellDate;
 
-+(CGFloat)cellWidth;
 @end

@@ -46,6 +46,7 @@
  */
 
 #import "InfiniteScrollView.h"
+#import "WYCurrentMonthView.h"
 
 @interface InfiniteScrollView ()
 
@@ -80,7 +81,7 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"offset %@", NSStringFromCGPoint(scrollView.contentOffset));
+//    NSLog(@"offset %@", NSStringFromCGPoint(scrollView.contentOffset));
 }
 
 #pragma mark - Layout
@@ -98,10 +99,10 @@
         self.contentOffset = CGPointMake(centerOffsetX, currentOffset.y);
         
         // move content by the same amount so it appears to stay still
-        for (UILabel *label in self.visibleLabels) {
-            CGPoint center = [self.labelContainerView convertPoint:label.center toView:self];
+        for (WYCurrentMonthView *view in self.visibleLabels) {
+            CGPoint center = [self.labelContainerView convertPoint:view.center toView:self];
             center.x += (centerOffsetX - currentOffset.x);
-            label.center = [self convertPoint:center toView:self.labelContainerView];
+            view.center = [self convertPoint:center toView:self.labelContainerView];
         }
     }
 }
@@ -123,24 +124,33 @@
 
 #pragma mark - Label Tiling
 
-- (UILabel *)insertLabel
-{
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
-    [label setNumberOfLines:3];
-    [label setText:@"1024 Block Street 1024 Block Street \nShaffer, CA\n95014"];
-    [self.labelContainerView addSubview:label];
+//- (UILabel *)insertLabel
+//{
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
+//    [label setNumberOfLines:3];
+//    [label setText:@"1024 Block Street 1024 Block Street \nShaffer, CA\n95014"];
+//    [self.labelContainerView addSubview:label];
+//
+//    return label;
+//}
 
+- (WYCurrentMonthView *)insertMonth
+{
+    WYCurrentMonthView *label = [[WYCurrentMonthView alloc] initWithDate:[WYDate currentDate] isCurrentMonth:NO];
+    [self.labelContainerView addSubview:label];
     return label;
 }
 
+
 - (CGFloat)placeNewLabelOnRight:(CGFloat)rightEdge
 {
-    UILabel *label = [self insertLabel];
+    
+    WYCurrentMonthView *label = [self insertMonth];
     [self.visibleLabels addObject:label]; // add rightmost label at the end of the array
     
     CGRect frame = [label frame];
     frame.origin.x = rightEdge;
-    frame.origin.y = [self.labelContainerView bounds].size.height - frame.size.height;
+    frame.origin.y = 0;//[self.labelContainerView bounds].size.height - frame.size.height;
     [label setFrame:frame];
         
     return CGRectGetMaxX(frame);
@@ -148,12 +158,12 @@
 
 - (CGFloat)placeNewLabelOnLeft:(CGFloat)leftEdge
 {
-    UILabel *label = [self insertLabel];
+    WYCurrentMonthView *label = [self insertMonth];
     [self.visibleLabels insertObject:label atIndex:0]; // add leftmost label at the beginning of the array
     
     CGRect frame = [label frame];
     frame.origin.x = leftEdge - frame.size.width;
-    frame.origin.y = [self.labelContainerView bounds].size.height - frame.size.height;
+    frame.origin.y = 0;//[self.labelContainerView bounds].size.height - frame.size.height;
     [label setFrame:frame];
     
     return CGRectGetMinX(frame);
@@ -169,7 +179,7 @@
     }
     
     // add labels that are missing on right side
-    UILabel *lastLabel = [self.visibleLabels lastObject];
+    WYCurrentMonthView *lastLabel = [self.visibleLabels lastObject];
     CGFloat rightEdge = CGRectGetMaxX([lastLabel frame]);
     while (rightEdge < maximumVisibleX)
     {
@@ -177,7 +187,7 @@
     }
     
     // add labels that are missing on left side
-    UILabel *firstLabel = self.visibleLabels[0];
+    WYCurrentMonthView *firstLabel = self.visibleLabels[0];
     CGFloat leftEdge = CGRectGetMinX([firstLabel frame]);
     while (leftEdge > minimumVisibleX)
     {

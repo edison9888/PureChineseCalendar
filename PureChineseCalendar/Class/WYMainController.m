@@ -9,12 +9,12 @@
 #import "WYMainController.h"
 #import "WYCurrentMonthView.h"
 #import "WYLunarMap.h"
-#import "DPLinearCalendarScrollView.h"
+#import "InfiniteScrollView.h"
 #import <mach/mach_time.h>  // for mach_absolute_time() and friends
 
-@interface WYMainController () <DPLinearCalendarScrollViewDataSource>
+@interface WYMainController () //<DPLinearCalendarScrollViewDataSource>
 {
-    __weak IBOutlet DPLinearCalendarScrollView *hScrollView;
+    __weak IBOutlet InfiniteScrollView *hScrollView;
     
     __weak IBOutlet UILabel *lunarYearLabel;
     __weak IBOutlet UILabel *lunarMonthLabel;
@@ -37,9 +37,7 @@
     // 背景
 //    UIImage *img = [UIImage imageNamed:@"backImage"];
 //    backImageView.image = img;
-    
 
-    
     // 显示今天农历日期
     NSDate *date = [NSDate date];
     NSCalendar *chineseCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSChineseCalendar];
@@ -60,9 +58,6 @@
     lunarMonthLabel.text = [NSString stringWithFormat:@"%@‑%@", lunarMonth, lunarDay];
     solarDayLabel.text = dateString;
 
-    // scroll view设定
-    hScrollView.linearDatasource = self;
-    hScrollView.wrapEnabled = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,13 +77,7 @@
     uint64_t nanos = elapsed * info.numer / info.denom;
     testLabel.text = [NSString stringWithFormat:@"%f", (CGFloat)nanos / NSEC_PER_SEC];
 }
-#pragma mark - scroll view data source
--(WYCurrentMonthView*) linearScrollViewCellForDate:(WYDate *)date isCurrentMonth:(BOOL)flag;
-{
-    WYCurrentMonthView *monthView = [[WYCurrentMonthView alloc] initWithDate:date isCurrentMonth:flag];
-    
-    return monthView;
-}
+
 
 - (IBAction)todayAction:(id)sender {
     // TODO: 要先研究DPLinearCalendarScrollView的源代码，然后再回来做todayAction功能。不研究明白，这个地方做不出来

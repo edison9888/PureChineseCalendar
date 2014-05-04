@@ -47,31 +47,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class DPLinearCalendarScrollView;
-@class WYCurrentMonthView;
-@class WYDate;
-
-@protocol DPLinearCalendarScrollViewDelegate <NSObject>
-
--(void)linearCalendarSelectedDate:(WYDate*)date;
-
-@end
-
-@protocol DPLinearCalendarScrollViewDataSource <NSObject>
-
-@required
--(WYCurrentMonthView*) linearScrollViewCellForDate:(WYDate *)date isCurrentMonth:(BOOL)flag;
-
-@end
-
-
 @interface DPLinearCalendarScrollView : UIScrollView <UIScrollViewDelegate>
 
-@property (nonatomic,strong) WYDate* selectedDate;
-
-@property (nonatomic,weak) id<DPLinearCalendarScrollViewDataSource> linearDatasource;
-@property (nonatomic,weak) id<DPLinearCalendarScrollViewDelegate> linearDelegate;
-
-@property (nonatomic) BOOL wrapEnabled;
 
 @end
