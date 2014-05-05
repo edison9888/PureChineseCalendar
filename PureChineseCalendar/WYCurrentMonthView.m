@@ -12,13 +12,7 @@
 #import <mach/mach_time.h>
 
 
-#define LEFT            21
-#define WEEK_TOP        20
-#define WIDTH           40
-#define HEIGHT          40
 
-#define SOLAR_TOP       (WEEK_TOP + 45)
-#define LUNAR_TOP       (WEEK_TOP + 60)
 @interface WYCurrentMonthView ()
 {
     BOOL isCurrentMonth;
@@ -69,13 +63,6 @@
     NSRange days = [[WYLunarMap instance].gregorianCalendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
     
 
-    // 显示星期
-    for (NSUInteger i = 0; i < 7; i++) {
-        float x = LEFT + i * WIDTH;
-        float y = WEEK_TOP ;
-        CGRect rect = CGRectMake(x, y, WIDTH, HEIGHT);
-        [[WYLunarMap instance].weeks[i] drawInRect:rect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
-    }
     
     // 显示月视图
     int step = 0;
@@ -101,7 +88,7 @@
             // 显示年月
             
             NSString *yearMonth = [NSString stringWithFormat:@"%d年%d月", _cellDate.year, _cellDate.month];
-            CGPoint point = CGPointMake(LEFT + 7, WEEK_TOP + 24);
+            CGPoint point = CGPointMake(LEFT + 7, YEAR_MONTH_TOP);
             [yearMonth drawAtPoint:point withAttributes:[WYLunarMap instance].yearMonthFontAttributes];
             CGSize size = [yearMonth sizeWithAttributes:[WYLunarMap instance].yearMonthFontAttributes];
             

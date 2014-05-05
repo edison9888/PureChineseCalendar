@@ -8,6 +8,10 @@
 ## NSChineseCalendar
 使用NSDateComponents获取的NSCalendarUnitYear，其中的year是<=60的数字，这样就直接对应了干支表的序列
 
+## 为什么是上下滑动，而不是左右滑动
+左右滑动：也许这样手指更舒服
+上下滑动：符合看日历时时间的显示顺序。可以更有效的利用屏幕显示更多内容。
+
 ## 参考
 1. [百度](http://zhidao.baidu.com/link?url=RT6G32Emrk3qMHj8HsQVEr0kG9ZFB3qauGrNsuSG6hKSr7cOaAaYHW8kdt7qefQXjRAH4CY51oJtYA_oBxdAmK)
 2. 谷歌

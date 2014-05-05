@@ -45,27 +45,24 @@
     
 
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:13.0];
-    UIColor *color = [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0];
-    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    [style setAlignment:NSTextAlignmentCenter];
-    _weekDayFontAttributes = @{NSForegroundColorAttributeName : color,
+    UIColor *defaultColor = [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0];
+    NSMutableParagraphStyle *styleCenter = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [styleCenter setAlignment:NSTextAlignmentCenter];
+    _weekDayFontAttributes = @{NSForegroundColorAttributeName : defaultColor,
                                      NSFontAttributeName:font,
-                                     NSParagraphStyleAttributeName:style};
+                                     NSParagraphStyleAttributeName:styleCenter};
     
+    UIColor *redColor = [UIColor colorWithRed:255.0/255 green:0/255 blue:0/255 alpha:1.0];
+    _lunarMonthFontAttributes = @{NSForegroundColorAttributeName : redColor,
+                                 NSFontAttributeName:font,
+                                 NSParagraphStyleAttributeName:styleCenter};
     
     font = [UIFont fontWithName:@"HelveticaNeue" size:11.0];
-    style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    [style setAlignment:NSTextAlignmentLeft];
-    _yearMonthFontAttributes = @{NSForegroundColorAttributeName : color,
+    NSMutableParagraphStyle *styleLeft = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [styleLeft setAlignment:NSTextAlignmentLeft];
+    _yearMonthFontAttributes = @{NSForegroundColorAttributeName : defaultColor,
                                  NSFontAttributeName:font,
-                                 NSParagraphStyleAttributeName:style};
-    
-    color = [UIColor colorWithRed:255.0/255 green:0/255 blue:0/255 alpha:1.0];
-    _lunarMonthFontAttributes = @{NSForegroundColorAttributeName : color,
-                                 NSFontAttributeName:font,
-                                 NSParagraphStyleAttributeName:style};
-    
-    
+                                 NSParagraphStyleAttributeName:styleLeft};
     return self;
 }
 @end

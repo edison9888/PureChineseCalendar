@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#define LEFT            21
+
+#define WIDTH           40
+#define HEIGHT          40
+
+#define YEAR_MONTH_TOP  0
+#define SOLAR_TOP       YEAR_MONTH_TOP + 13
+#define LUNAR_TOP       (SOLAR_TOP + 15)
+
 @interface WYLunarMap : NSObject
 
 // 一些常量
