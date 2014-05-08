@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define LEFT            21
+#define LEFT            20
 
 #define WIDTH           40
 #define HEIGHT          40

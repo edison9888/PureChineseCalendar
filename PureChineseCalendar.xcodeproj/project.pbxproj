@@ -33,6 +33,7 @@
 		D3C08D90190BEEAF00377905 /* backImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8E190BEEAF00377905 /* backImage@2x.png */; };
 		D3C08D91190BEEAF00377905 /* backImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8F190BEEAF00377905 /* backImage.png */; };
 		D3D9961D191708FE00FCA143 /* WYWeekdayLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D9961C191708FE00FCA143 /* WYWeekdayLabel.m */; };
+		D3D9962319191DF500FCA143 /* WYMonthRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D9962219191DF500FCA143 /* WYMonthRow.m */; };
 		D3E62B08190E11200084C309 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E62B07190E11200084C309 /* CoreText.framework */; };
 		D3EBBFB418AE60910053799A /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3EBBFB318AE60910053799A /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
@@ -87,6 +88,8 @@
 		D3C08D8F190BEEAF00377905 /* backImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backImage.png; sourceTree = "<group>"; };
 		D3D9961B191708FE00FCA143 /* WYWeekdayLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYWeekdayLabel.h; sourceTree = "<group>"; };
 		D3D9961C191708FE00FCA143 /* WYWeekdayLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYWeekdayLabel.m; sourceTree = "<group>"; };
+		D3D9962119191DF500FCA143 /* WYMonthRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYMonthRow.h; sourceTree = "<group>"; };
+		D3D9962219191DF500FCA143 /* WYMonthRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYMonthRow.m; sourceTree = "<group>"; };
 		D3E62B07190E11200084C309 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		D3EBBFB318AE60910053799A /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -168,6 +171,8 @@
 				D38858021913CE57002EC616 /* InfiniteScrollView.m */,
 				D3D9961B191708FE00FCA143 /* WYWeekdayLabel.h */,
 				D3D9961C191708FE00FCA143 /* WYWeekdayLabel.m */,
+				D3D9962119191DF500FCA143 /* WYMonthRow.h */,
+				D3D9962219191DF500FCA143 /* WYMonthRow.m */,
 				D38857EA190FF16D002EC616 /* DPLinearCalendar */,
 				D30CEECB189B4D720088CCE4 /* Supporting Files */,
 			);
@@ -330,6 +335,7 @@
 				D38857F2190FF16D002EC616 /* DPLinearCalendarScrollView.m in Sources */,
 				D30CEED1189B4D720088CCE4 /* main.m in Sources */,
 				D38857F1190FF16D002EC616 /* DPLinearCalendarCell.m in Sources */,
+				D3D9962319191DF500FCA143 /* WYMonthRow.m in Sources */,
 				D3C08D8B190B5A3500377905 /* WYCurrentMonthView.m in Sources */,
 				D38857F61912116C002EC616 /* WYDate.m in Sources */,
 				D37B963218B0A9C200623499 /* WYMainController.m in Sources */,
