@@ -9,6 +9,9 @@
 #import "WYWeekdayLabel.h"
 #import "WYLunarMap.h"
 
+#define LEFT            20
+#define WIDTH           40
+
 @implementation WYWeekdayLabel
 
 - (void)drawRect:(CGRect)rect

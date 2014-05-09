@@ -9,6 +9,9 @@
 #import "WYMonthRow.h"
 #import "WYLunarMap.h"
 
+
+
+
 @implementation WYMonthRow
 
 - (id)initWithStartDate:(WYDate *)date
@@ -18,9 +21,9 @@
         _startDate = date;
         if (_startDate.day == 1) {
             // 要显示年月的
-            self.bounds = CGRectMake(0, 0, 320, 68);
-        }else{
             self.bounds = CGRectMake(0, 0, 320, 55);
+        }else{
+            self.bounds = CGRectMake(0, 0, 320, 40);
         }
         self.backgroundColor = [UIColor redColor];
         
@@ -33,16 +36,22 @@
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
+    CGFloat centerY = self.bounds.size.height / 2;
+    
     WYDate *dateToDraw = _startDate;
     while (dateToDraw.month == _startDate.month) {
         
+#define LEFT            20
+        
+        
+#define WIDTH           40
+#define HEIGHT          40
+        
+#define YEAR_MONTH_TOP  5
         
         float x = LEFT + (dateToDraw.weekday - 1) * WIDTH;
-        
-        float solarY = 0;
-        
         NSString *solarDay = [NSString stringWithFormat:@"%lu", (unsigned long)dateToDraw.day];
-        CGRect rect = CGRectMake(x, solarY, WIDTH, HEIGHT);
+        CGRect rect = CGRectMake(x, centerY - 13, WIDTH, 15);
         [solarDay drawInRect:rect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
         
         
@@ -63,7 +72,7 @@
         }
         
         
-        rect = CGRectMake(x, LUNAR_TOP, WIDTH, HEIGHT);
+        rect = CGRectMake(x, centerY + 5, WIDTH, 15);
         if (dateToDraw.intLunarday == 1) {
             
             [dateToDraw.lunarMonth drawInRect:rect withAttributes:[WYLunarMap instance].lunarMonthFontAttributes];
@@ -72,6 +81,16 @@
         }
         
         if (dateToDraw.weekday == 7) {
+            
+            CGPoint point = CGPointMake(LEFT + (dateToDraw.weekday - 1) * WIDTH, self.bounds.size.height - 34);
+            CGRect ellipseRect = CGRectMake(point.x, point.y, WIDTH, HEIGHT);
+            
+            // 画圈
+            CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);//线条颜色
+            //    CGContextAddEllipseInRect(context, ellipseRect);
+            CGContextSetRGBFillColor (context, 0.8, 0.8, 0.8, 0.4);
+            CGContextFillEllipseInRect(context, ellipseRect);
+            CGContextStrokePath(context);
             break;
         }
         dateToDraw = [dateToDraw nextDate];
