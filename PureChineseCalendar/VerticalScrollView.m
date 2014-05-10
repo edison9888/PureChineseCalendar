@@ -45,10 +45,10 @@
  
  */
 
-#import "DPLinearCalendarScrollView.h"
+#import "VerticalScrollView.h"
 #import "WYCurrentMonthView.h"
 
-@interface DPLinearCalendarScrollView () <UIScrollViewDelegate>{
+@interface VerticalScrollView () <UIScrollViewDelegate>{
     NSMutableArray *visibleCells;
     UIView         *cellContainerView;
     WYDate *currentDate;
@@ -57,7 +57,7 @@
 @end
 
 
-@implementation DPLinearCalendarScrollView
+@implementation VerticalScrollView
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

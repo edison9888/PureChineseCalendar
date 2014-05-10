@@ -33,6 +33,7 @@
 + (WYDate *)currentDate;
 - (BOOL)isEqualToDate:(WYDate *)date;
 - (id)initWithYear:(NSUInteger)year month:(NSUInteger)month day:(NSUInteger)day;
++ (id)dateWithYear:(NSUInteger)year month:(NSUInteger)month day:(NSUInteger)day;
 - (WYDate *)nextDate;
 - (WYDate *)preDate;
 @end

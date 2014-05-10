@@ -78,7 +78,6 @@
                         <gestureRecognizers/>
                     </view>
                     <connections>
-                        <outlet property="hScrollView" destination="dyM-eL-93k" id="bFW-gZ-jOb"/>
                         <outlet property="lunarMonthLabel" destination="Pjt-N8-geT" id="13l-9d-81y"/>
                         <outlet property="lunarYearLabel" destination="Iju-fO-rHo" id="xtN-Cq-YYq"/>
                         <outlet property="solarDayLabel" destination="Cr6-Hf-FKM" id="iuX-e4-RAA"/>

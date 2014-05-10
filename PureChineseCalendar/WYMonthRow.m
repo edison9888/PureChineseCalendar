@@ -9,9 +9,10 @@
 #import "WYMonthRow.h"
 #import "WYLunarMap.h"
 
-
-
-
+#define LEFT            20
+#define WIDTH           40
+#define HEIGHT          40
+#define YEAR_MONTH_TOP  3
 @implementation WYMonthRow
 
 - (id)initWithStartDate:(WYDate *)date
@@ -36,29 +37,14 @@
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGFloat centerY = self.bounds.size.height / 2;
+    CGFloat centerY = self.bounds.size.height - 20;
     
     WYDate *dateToDraw = _startDate;
     while (dateToDraw.month == _startDate.month) {
         
-#define LEFT            20
-        
-        
-#define WIDTH           40
-#define HEIGHT          40
-        
-#define YEAR_MONTH_TOP  5
-        
-        float x = LEFT + (dateToDraw.weekday - 1) * WIDTH;
-        NSString *solarDay = [NSString stringWithFormat:@"%lu", (unsigned long)dateToDraw.day];
-        CGRect rect = CGRectMake(x, centerY - 13, WIDTH, 15);
-        [solarDay drawInRect:rect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
-        
-        
+        // 如果是阳历1号，要显示年月
         if (dateToDraw.day == 1) {
-            // 显示年月
-            
-            NSString *yearMonth = [NSString stringWithFormat:@"%d年%d月", dateToDraw.year, dateToDraw.month];
+            NSString *yearMonth = [NSString stringWithFormat:@"%lu年%lu月", (unsigned long)dateToDraw.year, (unsigned long)dateToDraw.month];
             CGPoint point = CGPointMake(LEFT + 7, YEAR_MONTH_TOP);
             [yearMonth drawAtPoint:point withAttributes:[WYLunarMap instance].yearMonthFontAttributes];
             CGSize size = [yearMonth sizeWithAttributes:[WYLunarMap instance].yearMonthFontAttributes];
@@ -71,18 +57,23 @@
             CGContextStrokePath(context);
         }
         
-        
-        rect = CGRectMake(x, centerY + 5, WIDTH, 15);
+        // 显示阳历日期
+        float x = LEFT + (dateToDraw.weekday - 1) * WIDTH;
+        NSString *solarDay = [NSString stringWithFormat:@"%lu", (unsigned long)dateToDraw.day];
+        CGRect rect = CGRectMake(x, centerY - 15, WIDTH, 15);
+        [solarDay drawInRect:rect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
+
+        // 显示阴历日期。如果是阴历的1号，要显示阴历月份
+        rect = CGRectMake(x, centerY, WIDTH, 15);
         if (dateToDraw.intLunarday == 1) {
-            
             [dateToDraw.lunarMonth drawInRect:rect withAttributes:[WYLunarMap instance].lunarMonthFontAttributes];
         }else{
             [dateToDraw.lunarday drawInRect:rect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
         }
         
-        if (dateToDraw.weekday == 7) {
-            
-            CGPoint point = CGPointMake(LEFT + (dateToDraw.weekday - 1) * WIDTH, self.bounds.size.height - 34);
+        // 如果是今天，就画圈
+        if ([dateToDraw isEqualToDate:[WYDate currentDate]]) {
+            CGPoint point = CGPointMake(LEFT + (dateToDraw.weekday - 1) * WIDTH, self.bounds.size.height - HEIGHT);
             CGRect ellipseRect = CGRectMake(point.x, point.y, WIDTH, HEIGHT);
             
             // 画圈
@@ -91,8 +82,13 @@
             CGContextSetRGBFillColor (context, 0.8, 0.8, 0.8, 0.4);
             CGContextFillEllipseInRect(context, ellipseRect);
             CGContextStrokePath(context);
+        }
+        
+        // 已经画到周六，该结束了
+        if (dateToDraw.weekday == 7) {
             break;
         }
+        
         dateToDraw = [dateToDraw nextDate];
     }
     

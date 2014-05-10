@@ -9,13 +9,11 @@
 #import "WYMainController.h"
 #import "WYCurrentMonthView.h"
 #import "WYLunarMap.h"
-#import "InfiniteScrollView.h"
 #import <mach/mach_time.h>
 #import "WYMonthRow.h"
 
 @interface WYMainController () //<DPLinearCalendarScrollViewDataSource>
 {
-    __weak IBOutlet InfiniteScrollView *hScrollView;
     
     __weak IBOutlet UILabel *lunarYearLabel;
     __weak IBOutlet UILabel *lunarMonthLabel;
@@ -67,9 +65,18 @@
     solarDayLabel.text = dateString;
 
     
-    WYMonthRow *row = [[WYMonthRow alloc] initWithStartDate:[WYDate currentDate]];
-    CGRect rect = row.frame;
+    
+    
+    WYMonthRow *row1 = [[WYMonthRow alloc] initWithStartDate:[WYDate dateWithYear:2014 month:5 day:1]];
+    CGRect rect = row1.frame;
     rect.origin.y = 30;
+    rect.origin.x = 0;
+    row1.frame = rect;
+    [self.view addSubview:row1];
+    
+    WYMonthRow *row = [[WYMonthRow alloc] initWithStartDate:[WYDate dateWithYear:2014 month:5 day:4]];
+    rect = row.frame;
+    rect.origin.y = row1.frame.size.height + row1.frame.origin.y;
     rect.origin.x = 0;
     row.frame = rect;
     [self.view addSubview:row];

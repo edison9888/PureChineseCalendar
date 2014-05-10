@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-
+#import "WYDate.h"
 
 @interface WYLunarMap : NSObject
 
@@ -23,12 +22,13 @@
 @property (nonatomic, strong, readonly) NSArray *arrayDay;
 @property (nonatomic, strong, readonly) NSArray *weeks;
 
-@property (nonatomic, strong) NSCalendar *gregorianCalendar;
-@property (nonatomic, strong) NSCalendar *chineseCalendar;
-@property (nonatomic, strong) NSDateFormatter *formatter;
+@property (nonatomic, strong, readonly) NSCalendar *gregorianCalendar;
+@property (nonatomic, strong, readonly) NSCalendar *chineseCalendar;
+@property (nonatomic, strong, readonly) NSDateFormatter *formatter;
 
-@property (nonatomic, strong) NSDictionary *weekDayFontAttributes;
-@property (nonatomic, strong) NSDictionary *yearMonthFontAttributes;
-@property (nonatomic, strong) NSDictionary *lunarMonthFontAttributes;
+@property (nonatomic, strong, readonly) NSDictionary *weekDayFontAttributes;
+@property (nonatomic, strong, readonly) NSDictionary *yearMonthFontAttributes;
+@property (nonatomic, strong, readonly) NSDictionary *lunarMonthFontAttributes;
+
 + (instancetype) instance;
 @end

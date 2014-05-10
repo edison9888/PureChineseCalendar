@@ -62,7 +62,7 @@
     [styleLeft setAlignment:NSTextAlignmentLeft];
     _yearMonthFontAttributes = @{NSForegroundColorAttributeName : defaultColor,
                                  NSFontAttributeName:font,
-                                 NSParagraphStyleAttributeName:styleLeft};
+                                 NSParagraphStyleAttributeName:styleLeft};   
     return self;
 }
 @end

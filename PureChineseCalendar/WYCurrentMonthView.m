@@ -94,7 +94,7 @@
         if (i == 1) {
             // 显示年月
             
-            NSString *yearMonth = [NSString stringWithFormat:@"%d年%d月", _cellDate.year, _cellDate.month];
+            NSString *yearMonth = [NSString stringWithFormat:@"%lu年%lu月", (unsigned long)_cellDate.year, (unsigned long)_cellDate.month];
             CGPoint point = CGPointMake(LEFT + 7, YEAR_MONTH_TOP);
             [yearMonth drawAtPoint:point withAttributes:[WYLunarMap instance].yearMonthFontAttributes];
             CGSize size = [yearMonth sizeWithAttributes:[WYLunarMap instance].yearMonthFontAttributes];
