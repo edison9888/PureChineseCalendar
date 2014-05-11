@@ -86,6 +86,7 @@
         
         // 已经画到周六，该结束了
         if (dateToDraw.weekday == 7) {
+            _endDate = dateToDraw;
             break;
         }
         

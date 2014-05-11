@@ -199,9 +199,9 @@
 		D30CEECA189B4D720088CCE4 /* PureChineseCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				D30CEED6189B4D720088CCE4 /* Main.storyboard */,
 				D308C5F5191DD13200986D46 /* Views */,
 				D308C5F2191DD01300986D46 /* Object */,
-				D30CEED6189B4D720088CCE4 /* Main.storyboard */,
 				D30CEED3189B4D720088CCE4 /* WYAppDelegate.h */,
 				D30CEED4189B4D720088CCE4 /* WYAppDelegate.m */,
 				D37B963018B0A9C200623499 /* WYMainController.h */,

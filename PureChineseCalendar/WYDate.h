@@ -36,4 +36,5 @@
 + (id)dateWithYear:(NSUInteger)year month:(NSUInteger)month day:(NSUInteger)day;
 - (WYDate *)nextDate;
 - (WYDate *)preDate;
+- (WYDate *)
 @end
