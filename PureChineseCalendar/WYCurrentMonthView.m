@@ -18,8 +18,8 @@
 #define HEIGHT          40
 
 #define YEAR_MONTH_TOP  0
-#define SOLAR_TOP       YEAR_MONTH_TOP + 13
-#define LUNAR_TOP       (SOLAR_TOP + 15)
+#define SOLAR_TOP       YEAR_MONTH_TOP + 18
+#define LUNAR_TOP       (SOLAR_TOP + 20)
 @interface WYCurrentMonthView ()
 {
     BOOL isCurrentMonth;
@@ -41,13 +41,6 @@
     
     return self;
 }
-
-//- (void)layoutSubviews
-//{
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 100)];
-//    label.text = @"a";
-//    [self addSubview:label];
-//}
 
 /*
  绘画参考：http://blog.csdn.net/zhibudefeng/article/details/8463268

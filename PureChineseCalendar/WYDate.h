@@ -12,7 +12,7 @@
 @property (nonatomic, readonly) NSUInteger year;
 @property (nonatomic, readonly) NSUInteger month;
 @property (nonatomic, readonly) NSUInteger day;
-
+@property (nonatomic, readonly) NSUInteger daysOfMonth;
 //@property (nonatomic, readonly) NSString *lunarYear;
 @property (nonatomic, readonly) NSString *lunarMonth;
 @property (nonatomic, readonly) NSString *lunarday;
@@ -36,5 +36,5 @@
 + (id)dateWithYear:(NSUInteger)year month:(NSUInteger)month day:(NSUInteger)day;
 - (WYDate *)nextDate;
 - (WYDate *)preDate;
-- (WYDate *)
+
 @end

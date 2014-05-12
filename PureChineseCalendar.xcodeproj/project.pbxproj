@@ -24,6 +24,7 @@
 		D30CEEEE189B4D720088CCE4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D30CEEEC189B4D720088CCE4 /* InfoPlist.strings */; };
 		D31A0FE0190A42390000964B /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = D31A0FDF190A42390000964B /* iTunesArtwork */; };
 		D37B963218B0A9C200623499 /* WYMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37B963118B0A9C200623499 /* WYMainController.m */; };
+		D38802A019207DEF004CEC76 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D388029F19207DEF004CEC76 /* Reveal.framework */; };
 		D38857E91909D3BC002EC616 /* WYLunarMap.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857E81909D3BC002EC616 /* WYLunarMap.m */; };
 		D38857F2190FF16D002EC616 /* DPLinearCalendarScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857EE190FF16D002EC616 /* DPLinearCalendarScrollView.m */; };
 		D38857F819122CB3002EC616 /* WYDateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857F719122CB3002EC616 /* WYDateTest.m */; };
@@ -73,6 +74,8 @@
 		D31A0FE1190A42420000964B /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		D37B963018B0A9C200623499 /* WYMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WYMainController.h; path = Class/WYMainController.h; sourceTree = "<group>"; };
 		D37B963118B0A9C200623499 /* WYMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WYMainController.m; path = Class/WYMainController.m; sourceTree = "<group>"; };
+		D388029F19207DEF004CEC76 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		D38802A119207E49004CEC76 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D38857E71909D3BC002EC616 /* WYLunarMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLunarMap.h; sourceTree = "<group>"; };
 		D38857E81909D3BC002EC616 /* WYLunarMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLunarMap.m; sourceTree = "<group>"; };
 		D38857ED190FF16D002EC616 /* DPLinearCalendarScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DPLinearCalendarScrollView.h; path = DPLinearCalendar/DPLinearCalendarScrollView.h; sourceTree = "<group>"; };
@@ -96,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D38802A019207DEF004CEC76 /* Reveal.framework in Frameworks */,
 				D3E62B08190E11200084C309 /* CoreText.framework in Frameworks */,
 				1E0E5E5818B8218F003B20BE /* CoreMotion.framework in Frameworks */,
 				D3EBBFB418AE60910053799A /* JavaScriptCore.framework in Frameworks */,
@@ -165,6 +169,7 @@
 		D30CEEB8189B4D720088CCE4 = {
 			isa = PBXGroup;
 			children = (
+				D388029F19207DEF004CEC76 /* Reveal.framework */,
 				D3C08D8C190B5B0800377905 /* README.md */,
 				D30CEECA189B4D720088CCE4 /* PureChineseCalendar */,
 				D30CEEE9189B4D720088CCE4 /* PureChineseCalendarTests */,
@@ -185,6 +190,7 @@
 		D30CEEC3189B4D720088CCE4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D38802A119207E49004CEC76 /* CFNetwork.framework */,
 				D3E62B07190E11200084C309 /* CoreText.framework */,
 				1E0E5E5718B8218F003B20BE /* CoreMotion.framework */,
 				D3EBBFB318AE60910053799A /* JavaScriptCore.framework */,
@@ -485,9 +491,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PureChineseCalendar/PureChineseCalendar-Prefix.pch";
 				INFOPLIST_FILE = "PureChineseCalendar/PureChineseCalendar-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					Reveal,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -499,9 +514,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PureChineseCalendar/PureChineseCalendar-Prefix.pch";
 				INFOPLIST_FILE = "PureChineseCalendar/PureChineseCalendar-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					Reveal,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -19,7 +19,14 @@
 {
     self = [super init];
     if (self) {
+        
         _startDate = date;
+        if (date.day + 7 <= _startDate.daysOfMonth) {
+            _endDate = [WYDate dateWithYear:date.year month:date.month day:date.day + 7];
+        }else{
+            _endDate = [WYDate dateWithYear:date.year month:date.month day:date.daysOfMonth];
+        }
+        
         if (_startDate.day == 1) {
             // 要显示年月的
             self.bounds = CGRectMake(0, 0, 320, 55);
@@ -85,8 +92,7 @@
         }
         
         // 已经画到周六，该结束了
-        if (dateToDraw.weekday == 7) {
-            _endDate = dateToDraw;
+        if (dateToDraw.weekday == 7 || dateToDraw.day == _endDate.day) {
             break;
         }
         

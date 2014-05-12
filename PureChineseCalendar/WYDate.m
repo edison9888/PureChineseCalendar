@@ -40,6 +40,10 @@
         NSString *solarDateString = [NSString stringWithFormat:@"%ld-%ld-%lu", (long)year, (long)month, (long)day];
         solarDate = [[WYLunarMap instance].formatter dateFromString:solarDateString];
         
+        NSRange range = [[WYLunarMap instance].gregorianCalendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:solarDate];
+        _daysOfMonth = range.length;
+        
+        // 计算阴历日期
         NSDateComponents *lunarDateComponents = [[WYLunarMap instance].chineseCalendar components:NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitMonth fromDate:solarDate];
         _weekday = [lunarDateComponents weekday];
         
@@ -48,7 +52,7 @@
         
         _lunarday = [WYLunarMap instance].arrayDay[_intLunarday - 1];
         _lunarMonth = [WYLunarMap instance].arrayMonth[_intLunarMonth - 1];
-        //        _year = [WYLunarMap instance].arrayYear[];
+        
     }
     return self;
 }

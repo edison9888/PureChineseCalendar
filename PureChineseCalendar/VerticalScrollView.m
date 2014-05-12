@@ -20,7 +20,8 @@
         visibleCells = [[NSMutableArray alloc] init];
         
         cellContainerView = [[UIView alloc] init];
-        cellContainerView.frame = CGRectMake(0, 0, self.contentSize.width/2, self.contentSize.height);
+        cellContainerView.backgroundColor = [UIColor greenColor];
+        cellContainerView.frame = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
         [self addSubview:cellContainerView];
 
         [cellContainerView setUserInteractionEnabled:YES];
@@ -45,12 +46,12 @@
     CGFloat distanceFromCenter = fabs(currentOffset.y - centerOffsetY);
     
     if (distanceFromCenter > (contentHeight / 4.0)) {
-        self.contentOffset = CGPointMake(centerOffsetY, currentOffset.y);
+        self.contentOffset = CGPointMake(0, centerOffsetY);
         
         // move content by the same amount so it appears to stay still
         for (WYMonthRow *view in visibleCells) {
             CGPoint center = [cellContainerView convertPoint:view.center toView:self];
-            center.x += (currentOffset.x - centerOffsetY);
+            center.x += (currentOffset.y - centerOffsetY);
             view.center = [self convertPoint:center toView:cellContainerView];
         }
     }
@@ -72,67 +73,37 @@
 #pragma mark - Cell Tiling
 #pragma mark Cell Create
 
-- (WYMonthRow *)insertCellForDate:(WYDate *)date isCurrentMonth:(BOOL)flag{
+- (WYMonthRow *)insertCellForDate:(WYDate *)date{
     
     WYMonthRow *cell = [[WYMonthRow alloc] initWithStartDate:date];
-        
     [cellContainerView addSubview:cell];
     return cell;
 }
 
-
-//- (CGFloat)placeNewCellOnRight:(CGFloat)rightEdge ofDate:(WYDate *)date{
-//    BOOL isCurrentMonth = [date isEqualToDate:currentDate];
-//    WYCurrentMonthView *cell=[self insertCellForDate:date isCurrentMonth:isCurrentMonth];
-//    
-//    [visibleCells addObject:cell]; // add rightmost label at the end of the array
-//    
-//    CGRect frame = [cell frame];
-//    frame.origin.x = 0;
-//    [cell setFrame:frame];
-//        
-//    return CGRectGetMaxX(frame);
-//}
-//
-//- (CGFloat)placeNewCellOnLeft:(CGFloat)leftEdge ofDate:(WYDate *)date{
-//    BOOL isCurrentMonth = [date isEqualToDate:currentDate];
-//    WYCurrentMonthView *cell=[self insertCellForDate:date isCurrentMonth:isCurrentMonth];
-//    
-//    [visibleCells insertObject:cell atIndex:0]; // add leftmost label at the beginning of the array
-//    
-//    CGRect frame = [cell frame];
-//    frame.origin.x = leftEdge - frame.size.width;
-//    [cell setFrame:frame];
-//    
-//    return CGRectGetMinX(frame);
-//}
-
 - (CGFloat)placeNewCellOnTop:(CGFloat)top ofDate:(WYDate *)date{
-    BOOL isCurrentMonth = [date isEqualToDate:currentDate];
-    WYMonthRow *cell=[self insertCellForDate:date isCurrentMonth:isCurrentMonth];
+    WYMonthRow *cell=[self insertCellForDate:date];
     
-    [visibleCells addObject:cell]; // add rightmost label at the end of the array
-    
-    CGRect frame = [cell frame];
-    frame.origin.y = 0;
-    frame.origin.x = 0;
-    [cell setFrame:frame];
-    
-    return CGRectGetMaxY(frame);
-}
-
-- (CGFloat)placeNewCellOnBottom:(CGFloat)bottom ofDate:(WYDate *)date{
-    BOOL isCurrentMonth = [date isEqualToDate:currentDate];
-    WYMonthRow *cell=[self insertCellForDate:date isCurrentMonth:isCurrentMonth];
-    
-    [visibleCells insertObject:cell atIndex:0]; // add leftmost label at the beginning of the array
+    [visibleCells insertObject:cell atIndex:0];
     
     CGRect frame = [cell frame];
+    frame.origin.y = top - frame.size.height;
     frame.origin.x = 0;
-    frame.origin.y = bottom - frame.size.height;
     [cell setFrame:frame];
     
     return CGRectGetMinY(frame);
+}
+
+- (CGFloat)placeNewCellOnBottom:(CGFloat)bottom ofDate:(WYDate *)date{
+    WYMonthRow *cell=[self insertCellForDate:date];
+    
+    [visibleCells addObject:cell];
+    
+    CGRect frame = [cell frame];
+    frame.origin.x = 0;
+    frame.origin.y = bottom;
+    [cell setFrame:frame];
+    
+    return CGRectGetMaxY(frame);
 }
 
 
@@ -140,25 +111,32 @@
     // the upcoming tiling logic depends on there already being at least one label in the visibleLabels array, so
     // to kick off the tiling we need to make sure there's at least one label
     if ([visibleCells count] == 0) {
-        [self placeNewCellOnTop:minimumVisibleY ofDate:currentDate];
+        [self placeNewCellOnTop:minimumVisibleY ofDate:[WYDate dateWithYear:currentDate.year month:currentDate.month day:1]];
     }
     
     // add cell that are missing on right side
     WYMonthRow *lastCell = [visibleCells lastObject];
-    CGFloat rightEdge = CGRectGetMaxY([lastCell frame]);
-    while (rightEdge < maximumVisibleY) {
-        // 这个地方不对。
-        rightEdge = [self placeNewCellOnTop:rightEdge ofDate:[[lastCell.endDate nextDate] dateByAddingMonths:1]];
+    CGFloat bottomEdge = CGRectGetMaxY([lastCell frame]);
+    while (bottomEdge < maximumVisibleY) {
+        bottomEdge = [self placeNewCellOnBottom:bottomEdge ofDate:[lastCell.endDate nextDate]];
+        lastCell = [visibleCells lastObject];
     }
     
     // add labels that are missing on left side
     WYMonthRow *firstCell = [visibleCells objectAtIndex:0];
-    CGFloat leftEdge = CGRectGetMinY([firstCell frame]);
-    while (leftEdge > minimumVisibleY) {
-        leftEdge = [self placeNewCellOnBottom:leftEdge ofDate:[[firstCell.endDate nextDate] dateByAddingMonths:-1]];
+    CGFloat topEdge = CGRectGetMinY([firstCell frame]);
+    while (topEdge > minimumVisibleY) {
+        WYDate *date;
+        if (firstCell.startDate.day < 7 ) {
+            date = [WYDate dateWithYear:firstCell.startDate.year month:firstCell.startDate.month day:1];
+        }else{
+            date = [WYDate dateWithYear:firstCell.startDate.year month:firstCell.startDate.month day:firstCell.startDate.day - 7];
+        }
+        topEdge = [self placeNewCellOnTop:topEdge ofDate:date];
+        firstCell = [visibleCells objectAtIndex:0];
     }
     
-    // remove labels that have fallen off right edge
+    // remove labels that have fallen off bottom edge
     lastCell = [visibleCells lastObject];
     while ([lastCell frame].origin.y > maximumVisibleY) {
         [lastCell removeFromSuperview];
@@ -166,9 +144,9 @@
         lastCell = [visibleCells lastObject];
     }
     
-    // remove labels that have fallen off left edge
+    // remove labels that have fallen off top edge
     firstCell = [visibleCells objectAtIndex:0];
-    while (CGRectGetMaxX([firstCell frame]) < minimumVisibleY) {
+    while (CGRectGetMaxY([firstCell frame]) < minimumVisibleY) {
         [firstCell removeFromSuperview];
         [visibleCells removeObjectAtIndex:0];
         firstCell = [visibleCells objectAtIndex:0];
