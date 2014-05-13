@@ -86,7 +86,7 @@
     [visibleCells insertObject:cell atIndex:0];
     
     CGRect frame = [cell frame];
-    frame.origin.y = top - frame.size.height;
+    frame.origin.y = top;
     frame.origin.x = 0;
     [cell setFrame:frame];
     
@@ -122,17 +122,27 @@
         lastCell = [visibleCells lastObject];
     }
     
-    // add labels that are missing on left side
+    // 在上方插入新的row
     WYMonthRow *firstCell = [visibleCells objectAtIndex:0];
     CGFloat topEdge = CGRectGetMinY([firstCell frame]);
     while (topEdge > minimumVisibleY) {
         WYDate *date;
-        if (firstCell.startDate.day < 7 ) {
+        if (firstCell.startDate.day == 1) {
+            if (firstCell.startDate.weekday == 1) {
+                date = [firstCell.startDate dateWithOffsetDay:-7];
+            }else{
+                double offset = 0-(double)firstCell.startDate.weekday + 1;
+                date = [firstCell.startDate dateWithOffsetDay:offset];
+            }
+            
+//            date = [firstCell.startDate preDate];
+//            date = [date dateWithOffsetDay:7-date.weekday];
+        }else if (firstCell.startDate.day < 7 ) {
             date = [WYDate dateWithYear:firstCell.startDate.year month:firstCell.startDate.month day:1];
         }else{
             date = [WYDate dateWithYear:firstCell.startDate.year month:firstCell.startDate.month day:firstCell.startDate.day - 7];
         }
-        topEdge = [self placeNewCellOnTop:topEdge ofDate:date];
+        topEdge = [self placeNewCellOnTop:topEdge - firstCell.frame.size.height ofDate:date];
         firstCell = [visibleCells objectAtIndex:0];
     }
     

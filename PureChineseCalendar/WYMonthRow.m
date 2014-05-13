@@ -21,8 +21,10 @@
     if (self) {
         
         _startDate = date;
-        if (date.day + 7 <= _startDate.daysOfMonth) {
-            _endDate = [WYDate dateWithYear:date.year month:date.month day:date.day + 7];
+        // 从startDate是星期几这个来决定endDate是相对startDate多了几天
+        NSUInteger endDay = date.day + (7 - date.weekday);
+        if (endDay <= _startDate.daysOfMonth) {
+            _endDate = [WYDate dateWithYear:date.year month:date.month day:endDay];
         }else{
             _endDate = [WYDate dateWithYear:date.year month:date.month day:date.daysOfMonth];
         }
@@ -33,21 +35,21 @@
         }else{
             self.bounds = CGRectMake(0, 0, 320, 40);
         }
-        self.backgroundColor = [UIColor redColor];
+        self.backgroundColor = [UIColor yellowColor];
         
     }
     return self;
 }
 
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect)arect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGFloat centerY = self.bounds.size.height - 20;
     
     WYDate *dateToDraw = _startDate;
-    while (dateToDraw.month == _startDate.month) {
+    while (YES) {
         
         // 如果是阳历1号，要显示年月
         if (dateToDraw.day == 1) {
@@ -67,15 +69,19 @@
         // 显示阳历日期
         float x = LEFT + (dateToDraw.weekday - 1) * WIDTH;
         NSString *solarDay = [NSString stringWithFormat:@"%lu", (unsigned long)dateToDraw.day];
-        CGRect rect = CGRectMake(x, centerY - 15, WIDTH, 15);
-        [solarDay drawInRect:rect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
+        CGRect tempRect = CGRectMake(x, centerY - 15, WIDTH, 15);
+        [solarDay drawInRect:tempRect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
+//        UILabel *label = [[UILabel alloc] initWithFrame:tempRect];
+//        label.backgroundColor = [UIColor grayColor];
+//        label.text = solarDay;
+//        [self addSubview:label];
 
         // 显示阴历日期。如果是阴历的1号，要显示阴历月份
-        rect = CGRectMake(x, centerY, WIDTH, 15);
+        tempRect = CGRectMake(x, centerY, WIDTH, 15);
         if (dateToDraw.intLunarday == 1) {
-            [dateToDraw.lunarMonth drawInRect:rect withAttributes:[WYLunarMap instance].lunarMonthFontAttributes];
+            [dateToDraw.lunarMonth drawInRect:tempRect withAttributes:[WYLunarMap instance].lunarMonthFontAttributes];
         }else{
-            [dateToDraw.lunarday drawInRect:rect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
+            [dateToDraw.lunarday drawInRect:tempRect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
         }
         
         // 如果是今天，就画圈
@@ -98,6 +104,8 @@
         
         dateToDraw = [dateToDraw nextDate];
     }
+    
+    CGContextStrokePath(context);
     
 }
 
