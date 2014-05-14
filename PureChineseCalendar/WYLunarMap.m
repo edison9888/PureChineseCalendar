@@ -7,8 +7,16 @@
 //
 
 #import "WYLunarMap.h"
+#import "WYDate.h"
 
+@interface WYLunarMap ()
+{
+
+}
+
+@end
 @implementation WYLunarMap
+@synthesize currentDate = _currentDate;
 + (instancetype) instance{
     static dispatch_once_t onceToken;
     static id instance = nil;
@@ -37,7 +45,7 @@
         [_formatter setDateFormat:@"yyyy-MM-d"];
         
         
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:13.0];
+        UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:14.0];
         UIColor *defaultColor = [UIColor colorWithRed:25.0/255 green:25.0/255 blue:25.0/255 alpha:1.0];
         NSMutableParagraphStyle *styleCenter = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         [styleCenter setAlignment:NSTextAlignmentCenter];
@@ -56,9 +64,21 @@
         _yearMonthFontAttributes = @{NSForegroundColorAttributeName : defaultColor,
                                      NSFontAttributeName:font,
                                      NSParagraphStyleAttributeName:styleLeft};
+        
+        
     }
     
 	   
     return self;
+}
+
+- (WYDate *)currentDate
+{
+    if (!_currentDate) {
+        NSDateComponents *dateComponents = [_gregorianCalendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+        _currentDate = [[WYDate alloc] initWithYear:[dateComponents year] month:[dateComponents month] day:[dateComponents day]];
+    }
+    
+    return _currentDate;
 }
 @end

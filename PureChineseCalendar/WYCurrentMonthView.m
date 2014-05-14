@@ -8,7 +8,6 @@
 
 #import "WYCurrentMonthView.h"
 #import "WYLunarMap.h"
-#import <CoreText/CoreText.h>
 #import <mach/mach_time.h>
 
 

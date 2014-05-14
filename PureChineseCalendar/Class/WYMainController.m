@@ -7,7 +7,6 @@
 //
 
 #import "WYMainController.h"
-#import "WYCurrentMonthView.h"
 #import "WYLunarMap.h"
 #import <mach/mach_time.h>
 #import "WYMonthRow.h"
@@ -64,22 +63,6 @@
     lunarMonthLabel.text = [NSString stringWithFormat:@"%@‑%@", lunarMonth, lunarDay];
     solarDayLabel.text = dateString;
 
-    
-    
-    
-//    WYMonthRow *row1 = [[WYMonthRow alloc] initWithStartDate:[WYDate dateWithYear:2014 month:5 day:1]];
-//    CGRect rect = row1.frame;
-//    rect.origin.y = 30;
-//    rect.origin.x = 0;
-//    row1.frame = rect;
-//    [self.view addSubview:row1];
-//    
-//    WYMonthRow *row = [[WYMonthRow alloc] initWithStartDate:[WYDate dateWithYear:2014 month:5 day:4]];
-//    rect = row.frame;
-//    rect.origin.y = row1.frame.size.height + row1.frame.origin.y;
-//    rect.origin.x = 0;
-//    row.frame = rect;
-//    [self.view addSubview:row];
 }
 
 - (void)didReceiveMemoryWarning

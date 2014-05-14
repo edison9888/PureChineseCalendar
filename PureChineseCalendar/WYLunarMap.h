@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WYDate.h"
 
+@class WYDate;
 @interface WYLunarMap : NSObject
 
 // 一些常量
@@ -30,5 +30,6 @@
 @property (nonatomic, strong, readonly) NSDictionary *yearMonthFontAttributes;
 @property (nonatomic, strong, readonly) NSDictionary *lunarMonthFontAttributes;
 
+@property (nonatomic, strong, readonly) WYDate *currentDate;
 + (instancetype) instance;
 @end

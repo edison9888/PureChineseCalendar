@@ -8,10 +8,13 @@
 
 #import "WYMonthRow.h"
 #import "WYLunarMap.h"
+#import <mach/mach_time.h>
+
 
 #define LEFT            20
 #define WIDTH           40
-#define HEIGHT          40
+#define HEIGHT          45
+#define FIRST_HEIGHT    60
 #define YEAR_MONTH_TOP  3
 @implementation WYMonthRow
 
@@ -31,24 +34,24 @@
         
         if (_startDate.day == 1) {
             // 要显示年月的
-            self.bounds = CGRectMake(0, 0, 320, 55);
+            self.bounds = CGRectMake(0, 0, 320, FIRST_HEIGHT);
         }else{
-            self.bounds = CGRectMake(0, 0, 320, 40);
+            self.bounds = CGRectMake(0, 0, 320, HEIGHT);
         }
-        self.backgroundColor = [UIColor yellowColor];
+        self.backgroundColor = [UIColor whiteColor];
         
     }
     return self;
 }
 
 
-- (void)drawRect:(CGRect)arect
+- (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-
-    CGFloat centerY = self.bounds.size.height - 20;
+    CGFloat centerY = rect.size.height - 20;
     
     WYDate *dateToDraw = _startDate;
+    
     while (YES) {
         
         // 如果是阳历1号，要显示年月
@@ -71,10 +74,6 @@
         NSString *solarDay = [NSString stringWithFormat:@"%lu", (unsigned long)dateToDraw.day];
         CGRect tempRect = CGRectMake(x, centerY - 15, WIDTH, 15);
         [solarDay drawInRect:tempRect withAttributes:[WYLunarMap instance].weekDayFontAttributes];
-//        UILabel *label = [[UILabel alloc] initWithFrame:tempRect];
-//        label.backgroundColor = [UIColor grayColor];
-//        label.text = solarDay;
-//        [self addSubview:label];
 
         // 显示阴历日期。如果是阴历的1号，要显示阴历月份
         tempRect = CGRectMake(x, centerY, WIDTH, 15);
@@ -85,9 +84,9 @@
         }
         
         // 如果是今天，就画圈
-        if ([dateToDraw isEqualToDate:[WYDate currentDate]]) {
-            CGPoint point = CGPointMake(LEFT + (dateToDraw.weekday - 1) * WIDTH, self.bounds.size.height - HEIGHT);
-            CGRect ellipseRect = CGRectMake(point.x, point.y, WIDTH, HEIGHT);
+        if ([dateToDraw isEqualToDate:[WYLunarMap instance].currentDate]) {
+            CGPoint point = CGPointMake(LEFT + (dateToDraw.weekday - 1) * WIDTH, self.bounds.size.height - WIDTH);
+            CGRect ellipseRect = CGRectMake(point.x, point.y, WIDTH, WIDTH);
             
             // 画圈
             CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);//线条颜色
@@ -97,16 +96,13 @@
             CGContextStrokePath(context);
         }
         
-        // 已经画到周六，该结束了
-        if (dateToDraw.weekday == 7 || dateToDraw.day == _endDate.day) {
+        // 结束标志
+        if (dateToDraw.day == _endDate.day) {
             break;
         }
         
         dateToDraw = [dateToDraw nextDate];
     }
-    
-    CGContextStrokePath(context);
-    
 }
 
 

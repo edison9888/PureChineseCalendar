@@ -17,17 +17,6 @@
 
 
 @implementation WYDate
-- (id)initWithYear:(NSUInteger)year month:(NSUInteger)month
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-    
-    _year = year;
-    _month = month;
-    return self;
-}
 
 - (id)initWithYear:(NSUInteger)year month:(NSUInteger)month day:(NSUInteger)day
 {
@@ -63,32 +52,9 @@
     return date;
 }
 
-- (WYDate *)dateByAddingMonths:(NSInteger)count
-{
-
-    // _month是在1~12取值，count只会是1与-1，所以，mouth的取值范围是0~13
-    NSInteger month = _month + count;
-    if (month == 0) {
-        return [[WYDate alloc] initWithYear:_year -1 month:12];
-    }else if (month >= 1 && month <= 12){
-        return [[WYDate alloc] initWithYear:_year month:month];
-    }else{  // month == 13
-        return [[WYDate alloc] initWithYear:_year + 1 month:1];
-    }
-}
-
-+ (WYDate *)currentDate
-{
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
-    WYDate *date = [WYDate dateWithYear:[dateComponents year] month:[dateComponents month] day:[dateComponents day]];
-    return date;
-}
-
 + (WYDate *)dateWithNSDate:(NSDate *)date
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSDateComponents *dateComponents = [[WYLunarMap instance].gregorianCalendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
     return [[WYDate alloc] initWithYear:[dateComponents year] month:[dateComponents month] day:[dateComponents day]];
 
 }
@@ -106,7 +72,10 @@
 - (WYDate *)nextDate
 {
     NSDate *nextSolarDate = [solarDate dateByAddingTimeInterval:(24 * 3600)];
-    return [WYDate dateWithNSDate:nextSolarDate];
+    NSDateComponents *dateComponents = [[WYLunarMap instance].gregorianCalendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:nextSolarDate];
+    WYDate *date = [[WYDate alloc] initWithYear:[dateComponents year] month:[dateComponents month] day:[dateComponents day]];
+    return date;
+    
 }
 - (WYDate *)preDate
 {

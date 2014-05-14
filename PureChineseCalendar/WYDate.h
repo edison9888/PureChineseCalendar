@@ -22,15 +22,6 @@
 @property (nonatomic, readonly) NSUInteger intLunarday;
 
 
-//// 如果属性year与month与实际时间一样，isCurrentMonth则为YES
-//@property (nonatomic, assign) BOOL isCurrentMonth;
-
-- (id)initWithYear:(NSUInteger)year month:(NSUInteger)month;
-- (WYDate *)dateByAddingMonths:(NSInteger)count;
-
-
-
-+ (WYDate *)currentDate;
 - (BOOL)isEqualToDate:(WYDate *)date;
 - (id)initWithYear:(NSUInteger)year month:(NSUInteger)month day:(NSUInteger)day;
 + (id)dateWithYear:(NSUInteger)year month:(NSUInteger)month day:(NSUInteger)day;

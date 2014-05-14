@@ -1,10 +1,10 @@
 #import "VerticalScrollView.h"
 #import "WYMonthRow.h"
+#import "WYLunarMap.h"
 
 @interface VerticalScrollView () <UIScrollViewDelegate>{
     NSMutableArray *visibleCells;
     UIView *cellContainerView;
-    WYDate *currentDate;
 }
 
 @end
@@ -17,10 +17,11 @@
     if ((self = [super initWithCoder:aDecoder])) {
         self.contentSize = CGSizeMake(320, 3000);
         self.delegate = self;
+        self.backgroundColor = [UIColor whiteColor];
+        
         visibleCells = [[NSMutableArray alloc] init];
         
         cellContainerView = [[UIView alloc] init];
-        cellContainerView.backgroundColor = [UIColor greenColor];
         cellContainerView.frame = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
         [self addSubview:cellContainerView];
 
@@ -29,14 +30,11 @@
         // hide horizontal scroll indicator so our recentering trick is not revealed
         [self setShowsVerticalScrollIndicator:NO];
         self.canCancelContentTouches=YES;
-        
-        currentDate = [WYDate currentDate];
     }
     return self;
 }
 
-#pragma mark -
-#pragma mark Layout
+#pragma mark - Layout
 
 // recenter content periodically to achieve impression of infinite scrolling
 - (void)recenterIfNecessary {
@@ -59,19 +57,19 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
     [self recenterIfNecessary];
     
-    // tile content in visible bounds
     CGRect visibleBounds = [self convertRect:[self bounds] toView:cellContainerView];
     CGFloat minimumVisibleY = CGRectGetMinY(visibleBounds);
     CGFloat maximumVisibleY = CGRectGetMaxY(visibleBounds);
 
     [self tileCellsFromMinY:minimumVisibleY toMaxY:maximumVisibleY];
+    
 }
 
 
 #pragma mark - Cell Tiling
-#pragma mark Cell Create
 
 - (WYMonthRow *)insertCellForDate:(WYDate *)date{
     
@@ -92,7 +90,6 @@
         frame.origin.y = top - cell.frame.size.height;
     }
     
-
     frame.origin.x = 0;
     [cell setFrame:frame];
     
@@ -118,23 +115,43 @@
     
     // 第一次添加cell
     if ([visibleCells count] == 0) {
-        [self placeNewCellOnTop:minimumVisibleY ofDate:[WYDate dateWithYear:currentDate.year month:currentDate.month day:1]];
+        [self placeNewCellOnTop:minimumVisibleY ofDate:[WYDate dateWithYear:[WYLunarMap instance].currentDate.year month:[WYLunarMap instance].currentDate.month day:1]];
     }
     
     // 往下文添加cell
     WYMonthRow *lastCell = [visibleCells lastObject];
     CGFloat bottomEdge = CGRectGetMaxY([lastCell frame]);
     while (bottomEdge < maximumVisibleY) {
-        bottomEdge = [self placeNewCellOnBottom:bottomEdge ofDate:[lastCell.endDate nextDate]];
+        
+        WYDate *date = [lastCell.endDate nextDate];
+        if (date.day == 1) {
+            bottomEdge +=10;
+        }
+        
+        uint64_t start = mach_absolute_time ();
+        bottomEdge = [self placeNewCellOnBottom:bottomEdge ofDate:date];
+        
+        uint64_t end = mach_absolute_time ();
+        uint64_t elapsed = end - start;
+        mach_timebase_info_data_t info;
+        mach_timebase_info(&info);
+        uint64_t nanos = elapsed * info.numer / info.denom;
+        CGFloat time = (CGFloat)nanos / NSEC_PER_SEC;
+        NSLog(@"bottomEdge加载时间 %f", time);
+        
         lastCell = [visibleCells lastObject];
+        
     }
     
     // 在上方插入新的cell
     WYMonthRow *firstCell = [visibleCells objectAtIndex:0];
     CGFloat topEdge = CGRectGetMinY([firstCell frame]);
     while (topEdge > minimumVisibleY) {
+        
+        uint64_t start = mach_absolute_time ();
         WYDate *date;
         if (firstCell.startDate.day == 1) {
+            topEdge -= 10;
             if (firstCell.startDate.weekday == 1) {
                 date = [firstCell.startDate dateWithOffsetDay:-7];
             }else{
@@ -146,7 +163,19 @@
         }else{
             date = [WYDate dateWithYear:firstCell.startDate.year month:firstCell.startDate.month day:firstCell.startDate.day - 7];
         }
+        
+        
+        
+        
         topEdge = [self placeNewCellOnTop:topEdge ofDate:date];
+        
+        uint64_t end = mach_absolute_time ();
+        uint64_t elapsed = end - start;
+        mach_timebase_info_data_t info;
+        mach_timebase_info(&info);
+        uint64_t nanos = elapsed * info.numer / info.denom;
+        CGFloat time = (CGFloat)nanos / NSEC_PER_SEC;
+        NSLog(@"topEdge加载时间 %f", time);
         firstCell = [visibleCells objectAtIndex:0];
     }
     
@@ -165,4 +194,27 @@
         firstCell = [visibleCells objectAtIndex:0];
     }
 }
+
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+//{
+//    CGRect visibleBounds = [self convertRect:[self bounds] toView:cellContainerView];
+//    CGFloat minimumVisibleY = CGRectGetMinY(visibleBounds);
+//    CGFloat maximumVisibleY = CGRectGetMaxY(visibleBounds);
+//    
+//    // 对于已经在视线外的cell，移除
+//    WYMonthRow *lastCell = [visibleCells lastObject];
+//    while ([lastCell frame].origin.y > maximumVisibleY) {
+//        [lastCell removeFromSuperview];
+//        [visibleCells removeLastObject];
+//        lastCell = [visibleCells lastObject];
+//    }
+//    
+//    WYMonthRow *firstCell = [visibleCells objectAtIndex:0];
+//    while (CGRectGetMaxY([firstCell frame]) < minimumVisibleY) {
+//        [firstCell removeFromSuperview];
+//        [visibleCells removeObjectAtIndex:0];
+//        firstCell = [visibleCells objectAtIndex:0];
+//    }
+//
+//}
 @end
