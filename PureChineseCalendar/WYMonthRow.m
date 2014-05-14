@@ -43,7 +43,7 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
+
     CGFloat centerY = self.bounds.size.height - 20;
     
     WYDate *dateToDraw = _startDate;
