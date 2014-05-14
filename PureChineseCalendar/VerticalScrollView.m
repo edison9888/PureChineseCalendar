@@ -51,7 +51,7 @@
         // move content by the same amount so it appears to stay still
         for (WYMonthRow *view in visibleCells) {
             CGPoint center = [cellContainerView convertPoint:view.center toView:self];
-            center.x += (currentOffset.y - centerOffsetY);
+            center.y -= (currentOffset.y - centerOffsetY);
             view.center = [self convertPoint:center toView:cellContainerView];
         }
     }
@@ -86,7 +86,13 @@
     [visibleCells insertObject:cell atIndex:0];
     
     CGRect frame = [cell frame];
-    frame.origin.y = top;
+    if (visibleCells.count == 1) {
+        frame.origin.y = top;
+    }else{
+        frame.origin.y = top - cell.frame.size.height;
+    }
+    
+
     frame.origin.x = 0;
     [cell setFrame:frame];
     
@@ -101,6 +107,7 @@
     CGRect frame = [cell frame];
     frame.origin.x = 0;
     frame.origin.y = bottom;
+
     [cell setFrame:frame];
     
     return CGRectGetMaxY(frame);
@@ -108,13 +115,13 @@
 
 
 - (void)tileCellsFromMinY:(CGFloat)minimumVisibleY toMaxY:(CGFloat)maximumVisibleY {
-    // the upcoming tiling logic depends on there already being at least one label in the visibleLabels array, so
-    // to kick off the tiling we need to make sure there's at least one label
+    
+    // 第一次添加cell
     if ([visibleCells count] == 0) {
         [self placeNewCellOnTop:minimumVisibleY ofDate:[WYDate dateWithYear:currentDate.year month:currentDate.month day:1]];
     }
     
-    // add cell that are missing on right side
+    // 往下文添加cell
     WYMonthRow *lastCell = [visibleCells lastObject];
     CGFloat bottomEdge = CGRectGetMaxY([lastCell frame]);
     while (bottomEdge < maximumVisibleY) {
@@ -122,7 +129,7 @@
         lastCell = [visibleCells lastObject];
     }
     
-    // 在上方插入新的row
+    // 在上方插入新的cell
     WYMonthRow *firstCell = [visibleCells objectAtIndex:0];
     CGFloat topEdge = CGRectGetMinY([firstCell frame]);
     while (topEdge > minimumVisibleY) {
@@ -134,27 +141,23 @@
                 double offset = 0-(double)firstCell.startDate.weekday + 1;
                 date = [firstCell.startDate dateWithOffsetDay:offset];
             }
-            
-//            date = [firstCell.startDate preDate];
-//            date = [date dateWithOffsetDay:7-date.weekday];
-        }else if (firstCell.startDate.day < 7 ) {
+        }else if (firstCell.startDate.day <= 7 ) {
             date = [WYDate dateWithYear:firstCell.startDate.year month:firstCell.startDate.month day:1];
         }else{
             date = [WYDate dateWithYear:firstCell.startDate.year month:firstCell.startDate.month day:firstCell.startDate.day - 7];
         }
-        topEdge = [self placeNewCellOnTop:topEdge - firstCell.frame.size.height ofDate:date];
+        topEdge = [self placeNewCellOnTop:topEdge ofDate:date];
         firstCell = [visibleCells objectAtIndex:0];
     }
     
-    // remove labels that have fallen off bottom edge
+    // 对于已经在视线外的cell，移除
     lastCell = [visibleCells lastObject];
     while ([lastCell frame].origin.y > maximumVisibleY) {
         [lastCell removeFromSuperview];
         [visibleCells removeLastObject];
         lastCell = [visibleCells lastObject];
     }
-    
-    // remove labels that have fallen off top edge
+
     firstCell = [visibleCells objectAtIndex:0];
     while (CGRectGetMaxY([firstCell frame]) < minimumVisibleY) {
         [firstCell removeFromSuperview];
