@@ -65,17 +65,21 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyM-eL-93k" customClass="VerticalScrollView">
-                                <rect key="frame" x="0.0" y="285" width="320" height="283"/>
+                                <rect key="frame" x="0.0" y="197" width="320" height="371"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="bq6-wf-j3Z"/>
-                                    <constraint firstAttribute="height" constant="283" id="liK-Z8-WCc"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="283" id="liK-Z8-WCc"/>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PP1-xC-mmm" customClass="WYWeekdayLabel">
-                                <rect key="frame" x="0.0" y="169" width="320" height="108"/>
+                                <rect key="frame" x="0.0" y="169" width="320" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.60000002379999995" green="0.9215686917" blue="0.8980392814" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="HPo-Pc-aYP"/>
+                                    <constraint firstAttribute="width" constant="320" id="Lrl-nL-jRN"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

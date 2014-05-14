@@ -113,4 +113,10 @@
     NSDate *preSolarDate = [solarDate dateByAddingTimeInterval:-(24 * 3600)];
     return [WYDate dateWithNSDate:preSolarDate];
 }
+
+- (WYDate *)dateWithOffsetDay:(double)days
+{
+    NSDate *nextSolarDate = [solarDate dateByAddingTimeInterval:(days * 24 * 3600)];
+    return [WYDate dateWithNSDate:nextSolarDate];
+}
 @end

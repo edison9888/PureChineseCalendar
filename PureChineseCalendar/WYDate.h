@@ -37,4 +37,5 @@
 - (WYDate *)nextDate;
 - (WYDate *)preDate;
 
+- (WYDate *)dateWithOffsetDay:(double)days;
 @end
