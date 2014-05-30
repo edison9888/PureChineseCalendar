@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @interface WYDate : NSObject
+
+// 公历
 @property (nonatomic, readonly) NSUInteger year;
 @property (nonatomic, readonly) NSUInteger month;
 @property (nonatomic, readonly) NSUInteger day;
 @property (nonatomic, readonly) NSUInteger daysOfMonth;
+
+// 农历
 //@property (nonatomic, readonly) NSString *lunarYear;
 @property (nonatomic, readonly) NSString *lunarMonth;
 @property (nonatomic, readonly) NSString *lunarday;

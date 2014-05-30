@@ -1,10 +1,13 @@
 #import "VerticalScrollView.h"
 #import "WYMonthRow.h"
 #import "WYLunarMap.h"
+#import "Row.h"
 
 @interface VerticalScrollView () <UIScrollViewDelegate>{
     NSMutableArray *visibleCells;
     UIView *cellContainerView;
+    
+    NSData *reuseArchiver;
 }
 
 @end
@@ -30,6 +33,10 @@
         // hide horizontal scroll indicator so our recentering trick is not revealed
         [self setShowsVerticalScrollIndicator:NO];
         self.canCancelContentTouches=YES;
+        
+        
+        WYMonthRow *row = [[WYMonthRow alloc] init];
+        reuseArchiver = [NSKeyedArchiver archivedDataWithRootObject:row];
     }
     return self;
 }
@@ -73,7 +80,9 @@
 
 - (WYMonthRow *)insertCellForDate:(WYDate *)date{
     
-    WYMonthRow *cell = [[WYMonthRow alloc] initWithStartDate:date];
+    WYMonthRow *cell = [NSKeyedUnarchiver unarchiveObjectWithData:reuseArchiver];
+//    WYMonthRow *cell = [reuseNib instantiateWithOwner:nil options:nil][0];
+    cell.startDate = date;
     [cellContainerView addSubview:cell];
     return cell;
 }
@@ -124,6 +133,10 @@
     while (bottomEdge < maximumVisibleY) {
         
         WYDate *date = [lastCell.endDate nextDate];
+        // 测试语句
+//        WYDate *date = lastCell.startDate;
+        
+        
         if (date.day == 1) {
             bottomEdge +=10;
         }
@@ -137,7 +150,7 @@
         mach_timebase_info(&info);
         uint64_t nanos = elapsed * info.numer / info.denom;
         CGFloat time = (CGFloat)nanos / NSEC_PER_SEC;
-        NSLog(@"bottomEdge加载时间 %f", time);
+//        NSLog(@"bottomEdge加载时间 %f", time);
         
         lastCell = [visibleCells lastObject];
         
@@ -164,9 +177,6 @@
             date = [WYDate dateWithYear:firstCell.startDate.year month:firstCell.startDate.month day:firstCell.startDate.day - 7];
         }
         
-        
-        
-        
         topEdge = [self placeNewCellOnTop:topEdge ofDate:date];
         
         uint64_t end = mach_absolute_time ();
@@ -175,7 +185,7 @@
         mach_timebase_info(&info);
         uint64_t nanos = elapsed * info.numer / info.denom;
         CGFloat time = (CGFloat)nanos / NSEC_PER_SEC;
-        NSLog(@"topEdge加载时间 %f", time);
+//        NSLog(@"topEdge加载时间 %f", time);
         firstCell = [visibleCells objectAtIndex:0];
     }
     

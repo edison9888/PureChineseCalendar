@@ -27,6 +27,8 @@
 		D38802A019207DEF004CEC76 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D388029F19207DEF004CEC76 /* Reveal.framework */; };
 		D38857E91909D3BC002EC616 /* WYLunarMap.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857E81909D3BC002EC616 /* WYLunarMap.m */; };
 		D38857F819122CB3002EC616 /* WYDateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D38857F719122CB3002EC616 /* WYDateTest.m */; };
+		D3BA39801937485700DAD5C3 /* Row.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3BA397D1937485700DAD5C3 /* Row.xib */; };
+		D3BA39811937485700DAD5C3 /* Row.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BA397F1937485700DAD5C3 /* Row.m */; };
 		D3C08D8D190B5B0800377905 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8C190B5B0800377905 /* README.md */; };
 		D3C08D90190BEEAF00377905 /* backImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8E190BEEAF00377905 /* backImage@2x.png */; };
 		D3C08D91190BEEAF00377905 /* backImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C08D8F190BEEAF00377905 /* backImage.png */; };
@@ -77,6 +79,9 @@
 		D38857E71909D3BC002EC616 /* WYLunarMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLunarMap.h; sourceTree = "<group>"; };
 		D38857E81909D3BC002EC616 /* WYLunarMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLunarMap.m; sourceTree = "<group>"; };
 		D38857F719122CB3002EC616 /* WYDateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDateTest.m; sourceTree = "<group>"; };
+		D3BA397D1937485700DAD5C3 /* Row.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Row.xib; sourceTree = "<group>"; };
+		D3BA397E1937485700DAD5C3 /* Row.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Row.h; sourceTree = "<group>"; };
+		D3BA397F1937485700DAD5C3 /* Row.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Row.m; sourceTree = "<group>"; };
 		D3C08D8C190B5B0800377905 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D3C08D8E190BEEAF00377905 /* backImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backImage@2x.png"; sourceTree = "<group>"; };
 		D3C08D8F190BEEAF00377905 /* backImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backImage.png; sourceTree = "<group>"; };
@@ -134,6 +139,9 @@
 				D308C5FA191DD1ED00986D46 /* VerticalScrollView.m */,
 				D3D9962119191DF500FCA143 /* WYMonthRow.h */,
 				D3D9962219191DF500FCA143 /* WYMonthRow.m */,
+				D3BA397D1937485700DAD5C3 /* Row.xib */,
+				D3BA397E1937485700DAD5C3 /* Row.h */,
+				D3BA397F1937485700DAD5C3 /* Row.m */,
 			);
 			name = "Vertical View";
 			sourceTree = "<group>";
@@ -313,6 +321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3BA39801937485700DAD5C3 /* Row.xib in Resources */,
 				D30CEEDD189B4D720088CCE4 /* Images.xcassets in Resources */,
 				D3C08D91190BEEAF00377905 /* backImage.png in Resources */,
 				D31A0FE0190A42390000964B /* iTunesArtwork in Resources */,
@@ -338,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3BA39811937485700DAD5C3 /* Row.m in Sources */,
 				D30CEED5189B4D720088CCE4 /* WYAppDelegate.m in Sources */,
 				D30CEED1189B4D720088CCE4 /* main.m in Sources */,
 				D3D9962319191DF500FCA143 /* WYMonthRow.m in Sources */,

@@ -61,7 +61,7 @@
 
 - (BOOL)isEqualToDate:(WYDate *)date
 {
-    if (_year == date.year && _month == date.month && _day == date.day) {
+    if (_day == date.day && _month == date.month && _year == date.year) {
         return YES;
     }else{
         return NO;

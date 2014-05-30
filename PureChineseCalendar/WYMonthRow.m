@@ -16,6 +16,14 @@
 #define HEIGHT          45
 #define FIRST_HEIGHT    60
 #define YEAR_MONTH_TOP  3
+
+@interface WYMonthRow ()
+{
+    
+}
+
+@end
+
 @implementation WYMonthRow
 
 - (id)initWithStartDate:(WYDate *)date
@@ -23,25 +31,41 @@
     self = [super init];
     if (self) {
         
-        _startDate = date;
-        // 从startDate是星期几这个来决定endDate是相对startDate多了几天
-        NSUInteger endDay = date.day + (7 - date.weekday);
-        if (endDay <= _startDate.daysOfMonth) {
-            _endDate = [WYDate dateWithYear:date.year month:date.month day:endDay];
-        }else{
-            _endDate = [WYDate dateWithYear:date.year month:date.month day:date.daysOfMonth];
-        }
+        self.startDate = date;
         
-        if (_startDate.day == 1) {
-            // 要显示年月的
-            self.bounds = CGRectMake(0, 0, 320, FIRST_HEIGHT);
-        }else{
-            self.bounds = CGRectMake(0, 0, 320, HEIGHT);
-        }
         self.backgroundColor = [UIColor whiteColor];
         
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return self;
+}
+
+- (void)setStartDate:(WYDate *)startDate
+{
+    _startDate = startDate;
+    // 从startDate是星期几这个来决定endDate是相对startDate多了几天
+    NSUInteger endDay = startDate.day + (7 - startDate.weekday);
+    if (endDay <= _startDate.daysOfMonth) {
+        _endDate = [[WYDate alloc] initWithYear:startDate.year month:startDate.month day:endDay];
+    }else{
+        _endDate = [[WYDate alloc] initWithYear:startDate.year month:startDate.month day:startDate.daysOfMonth];
+    }
+    
+    if (_startDate.day == 1) {
+        // 要显示年月的
+        self.bounds = CGRectMake(0, 0, 320, FIRST_HEIGHT);
+    }else{
+        self.bounds = CGRectMake(0, 0, 320, HEIGHT);
+    }
 }
 
 
